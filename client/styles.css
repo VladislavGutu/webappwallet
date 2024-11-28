@@ -70,7 +70,7 @@ h1 {
 }
 
 .info-section {
-    border: 1px solid rgba(0, 0, 0, 0.22); /* Added border */
+    border: 1px solid rgba(0, 0, 0, 0.22);
     border-radius: 10px;
 }
 
@@ -95,7 +95,7 @@ h1 {
 .liquidity-section {
     margin: 20px 0;
     text-align: left;
-    border: 1px solid rgba(0, 0, 0, 0.22); /* Added border */
+    border: 1px solid rgba(0, 0, 0, 0.22);
     padding: 10px;
     border-radius: 10px;
 }
