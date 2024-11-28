@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Account</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <img src="./assets/money-icon.png" alt="Money Icon" class="icon">
+        <h1>Congratulations, you unlocked your crypto investment account for level "x"</h1>
+    </div>
+
+    <div class="progress-section">
+        <div class="linear-progress">
+            <div class="progress-bar" id="linearProgress"></div>
+            <span class="progress-percentage" id="linearProgressPercentage">0%</span>
+        </div>
+        <p class="raised" data-target="0">0$ raised</p>
+    </div>
+
+    <div class="info-section">
+        <div class="info-header">
+            <img src="./assets/question-mark.png" alt="Information Image" class="info-image">
+            <h3 class="info-title">Information</h3>
+        </div>
+        <div class="info-description">
+            <p>Monitor the liquidity flowing into XLM250 in real-time - stay updated live!</p>
+        </div>
+    </div>
+
+    <div class="liquidity-section">
+        <div class="liquidity-header">
+            <img src="./assets/credit-card.png" alt="Liquidity Image" class="liquidity-icon">
+            <div class="liquidity-container">
+                <h3 class="liquidity-title">Liquidity</h3>
+                <p class="liquidity-count" data-counter="0">10,000,000,000,000$</p>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+        <div class="transaction-info">
+            <div class="left-side-info">
+                <div class="transactions-sum" data-target="0">1,853,816,440,225$</div>
+
+                <div class="transactions-count">823 Transactions</div>
+            </div>
+            <div class="right-side-info">
+                <div class="radial-progress">
+                    <svg class="progress-circle" viewBox="0 0 36 36">
+                        <defs>
+                            <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(20, 159, 40, 0.05)"/>
+                                <stop offset="100%" stop-color="rgba(20, 159, 40, 1)"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="circle-bg" d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"></path>
+                        <path class="circle" stroke-dasharray="0, 100" stroke="url(#progress-gradient)"
+                              d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"></path>
+                    </svg>
+                    <span class="circle-percentage">19%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="withdraw-btn">
+        Withdraw <img src="./assets/play.png" alt="Play Icon" class="play-icon">
+    </button>
+</div>
+<div id="modal" class="hidden">
+    <div class="modal-content">
+        <p class="modal-text">Soon you will be able to withdraw your money!</p>
+        <button id="closeModal" class="modal-close-btn">Close</button>
+    </div>
+</div>
+<script src="script.js"></script>
+<script src="modal.js"></script>
+</body>
+</html>
+
