@@ -14,7 +14,12 @@
         <img src="assets/money-icon.png" alt="Money Icon" class="icon">
         <h1>Congratulations, you unlocked your crypto investment account for level "x"</h1>
     </div>
-
+    <div id="modal" class="hidden">
+        <div class="modal-content">
+            <p class="modal-text">Soon you will be able to withdraw your money!</p>
+            <button id="closeModal" class="modal-close-btn">Close</button>
+        </div>
+    </div>
     <div class="progress-section">
         <div class="linear-progress">
             <div class="progress-bar" id="linearProgress"></div>
@@ -71,12 +76,7 @@
         Withdraw <img src="assets/play.png" alt="Play Icon" class="play-icon">
     </button>
 </div>
-<div id="modal" class="hidden">
-    <div class="modal-content">
-        <p class="modal-text">Soon you will be able to withdraw your money!</p>
-        <button id="closeModal" class="modal-close-btn">Close</button>
-    </div>
-</div>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="client/script.js"></script>
 <script src="client/modal.js"></script>
