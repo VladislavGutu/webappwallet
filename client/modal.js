@@ -4,16 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModalBtn = document.getElementById("closeModal");
 
     openModalBtn.addEventListener("click", () => {
-        modal.classList.remove("hidden");
+        modal.classList.add("show");
     });
 
     closeModalBtn.addEventListener("click", () => {
-        modal.classList.add("hidden");
+        modal.classList.remove("show");
     });
 
     modal.addEventListener("click", (e) => {
         if (e.target === modal) {
-            modal.classList.add("hidden");
+            modal.classList.remove("show");
         }
     });
 });
