@@ -9,15 +9,15 @@
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 9999; /* Убедитесь, что модальное окно будет поверх других элементов */
-    opacity: 0; /* Начальная непрозрачность */
-    pointer-events: none; /* Блокируем клики, пока модальное окно не активировано */
-    transition: opacity 0.3s ease; /* Плавный переход для появления */
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 #modal.show {
     opacity: 1;
-    pointer-events: all; /* Разрешаем клики, когда окно показывается */
+    pointer-events: all;
 }
 
 .modal-content {
