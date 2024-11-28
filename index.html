@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="client/modal.css">
 </head>
 <body>
-<div class="container">
+<div id="modal" class="hidden">
+    <div class="modal-content">
+        <p class="modal-text">Soon you will be able to withdraw your money!</p>
+        <button id="closeModal" class="modal-close-btn">Close</button>
+    </div>
+</div>
 
+<div class="container">
     <div class="header">
         <img src="assets/money-icon.png" alt="Money Icon" class="icon">
         <h1>Congratulations, you unlocked your crypto investment account for level "x"</h1>
     </div>
-    <div id="modal" class="hidden">
-        <div class="modal-content">
-            <p class="modal-text">Soon you will be able to withdraw your money!</p>
-            <button id="closeModal" class="modal-close-btn">Close</button>
-        </div>
-    </div>
+
     <div class="progress-section">
         <div class="linear-progress">
             <div class="progress-bar" id="linearProgress"></div>
