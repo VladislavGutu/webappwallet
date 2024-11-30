@@ -95,3 +95,19 @@ tabButtons.forEach((button) => {
 
 tokensData.forEach(createTokenPanel);
 updateTotalBalance();
+
+const walletData = {
+  "walletAddress": "GBT7GBQLQLIICGUFYE7F7WXEQIH3OT42ZEUX3ORM6TIBIACFO7WVHLUB",
+  "balance": 10000
+};
+
+function formatWalletAddress(walletAddress) {
+  const start = walletAddress.slice(0, 4);
+  const end = walletAddress.slice(-4);
+  return `${start}...${end}`;
+}
+
+const formattedWallet = formatWalletAddress(walletData.walletAddress);
+document.getElementById('wallet-address').textContent = formattedWallet;
+
+document.getElementById('balance-amount').textContent = walletData.balance.toFixed(2);

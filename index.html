@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Wallet</title>
-  <link rel="stylesheet" href="client/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wallet</title>
+    <link rel="stylesheet" href="client/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="wallet-container">
+<div class="wallet-container">
     <div class="header">
-      <div class="wallet-header">
-        <span class="balance">$5730</span>
-        <span class="wallet-name">GDUZ...34G3</span>
-      </div>
+        <div class="wallet-header">
+            <div class="balance">$10,000</div>
+            <div class="wallet-name">
+                <span id="wallet-address"></span>
+            </div>
+        </div>
     </div>
 
     <div class="main-content">
-      <div class="tabs">
-        <button class="tab-button active" data-tab="coins-tab">Coins</button>
-        <button class="tab-button" data-tab="history-tab">History</button>
-      </div>
-
-      <div id="coins-tab" class="tab-content active">
-        <!-- Dynamic tokens will be inserted here -->
-      </div>
-
-      <div id="history-tab" class="tab-content">
-        <div class="progress-container">
-          <span class="level">Level 1</span>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%;"></div>
-          </div>
-          <span class="progress-earnings">+10,000$</span>
+        <div class="tabs">
+            <button class="tab-button active" data-tab="coins-tab">Coins</button>
+            <button class="tab-button" data-tab="history-tab">History</button>
         </div>
-      </div>
+
+        <div id="coins-tab" class="tab-content active">
+            <!-- Dynamic tokens will be inserted here -->
+        </div>
+
+        <div id="history-tab" class="tab-content">
+            <div class="progress-container">
+                <span class="level">Level 1</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;"></div>
+                </div>
+                <span class="progress-earnings">+10,000$</span>
+            </div>
+        </div>
     </div>
-  </div>
-  <script src="client/script.js"></script>
+</div>
+<script src="client/script.js"></script>
 </body>
 </html>
