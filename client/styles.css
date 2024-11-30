@@ -134,7 +134,7 @@ body {
 
 .token-price {
   font-size: 12px;
-  color: #4caf50;
+  color: #8e8e8e;
   margin-top: 6px;
 }
 
@@ -145,14 +145,14 @@ body {
 }
 
 .token-quantity {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: #000000;
 }
 
 .token-total {
-  font-size: 12px;
-  color: #333;
+  font-size: 13px;
+  color: #8e8e8e;
   margin-top: 4px;
 }
 
@@ -185,7 +185,7 @@ body {
 }
 
 .transaction-symbol {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #333;
 }
