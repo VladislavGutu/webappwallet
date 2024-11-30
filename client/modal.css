@@ -1,7 +1,7 @@
 #modal {
     position: absolute;
     top: 250px;
-    left: 750px;
+    /*left: 750px;*/
     width: 300px;
     height: 150px;
     display: flex;
