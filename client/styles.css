@@ -45,14 +45,12 @@ body {
   max-width: 100%;
 }
 
-/* Основной контент */
 .main-content {
   padding: 15px;
   background-color: #ffffff;
   border-top: 1px solid #e0e0e0;
 }
 
-/* Вкладки */
 .tabs {
   display: flex;
   justify-content: space-between;
@@ -75,7 +73,6 @@ body {
   border-bottom: 2px solid #5191f4;
 }
 
-/* Таблица токенов и транзакций */
 .tab-content {
   display: none;
 }
@@ -84,7 +81,6 @@ body {
   display: block;
 }
 
-/* Панели токенов */
 .token-panel {
   display: flex;
   align-items: center;
@@ -156,8 +152,7 @@ body {
   margin-top: 4px;
 }
 
-/* Панели транзакций */
-.transaction-panel {
+.rewards-panel {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -168,35 +163,35 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.transaction-info {
+.rewards-info {
   display: flex;
   align-items: center;
 }
 
-.transaction-logo {
+.rewards-logo {
   width: 40px;
   height: 40px;
   margin-right: 15px;
 }
 
-.transaction-details {
+.rewards-details {
   display: flex;
   flex-direction: column;
 }
 
-.transaction-symbol {
+.rewards-symbol {
   font-size: 14px;
   font-weight: bold;
   color: #333;
 }
 
-.transaction-amount {
+.rewards-amount {
   font-size: 16px;
   color: #4caf50;
   margin-top: 5px;
 }
 
-.transaction-level {
+.rewards-level {
   font-size: 12px;
   background-color: #d3d3d3;
   color: #333;
@@ -204,9 +199,76 @@ body {
   border-radius: 4px;
 }
 
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popup .close-popup {
+    background-color: #5191f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup .close-popup:hover {
+    background-color: #396fc9;
+}
+
+.popup.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.withdraw-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #5191f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.withdraw-button:hover {
+    background-color: #396fc9;
+}
+
+
 .footer {
     padding: 15px;
     text-align: center;
     color: #c6c5c5;
-
 }
