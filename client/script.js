@@ -23,7 +23,6 @@ const tokensData = [
   }
 ];
 
-// Функция для генерации панели токена
 function createTokenPanel(token) {
   const tokenPanel = document.createElement('div');
   tokenPanel.classList.add('token-panel');
@@ -48,36 +47,28 @@ function createTokenPanel(token) {
   document.getElementById('tokens-tab').appendChild(tokenPanel);
 }
 
-// Функция для обновления общего баланса
 function updateTotalBalance() {
   let totalBalance = 0;
 
-  // Рассчитываем общую сумму всех токенов
   tokensData.forEach(token => {
     totalBalance += token.price * token.amount;
   });
 
-  // Обновляем значение общего баланса
   document.getElementById('total-balance').textContent = `$${totalBalance.toFixed(2)}`;
 }
 
-// Генерация панелей для токенов
 tokensData.forEach(createTokenPanel);
 
-// Обновляем общий баланс после добавления токенов
 updateTotalBalance();
 
-// Переключение вкладок
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 
 tabButtons.forEach(button => {
   button.addEventListener('click', () => {
-    // Снимаем активность с текущей вкладки
     tabButtons.forEach(btn => btn.classList.remove('active'));
     tabContents.forEach(content => content.classList.remove('active'));
 
-    // Добавляем активность на выбранную вкладку
     button.classList.add('active');
     document.querySelector(`.tab-content#${button.dataset.tab}`).classList.add('active');
   });
