@@ -72,13 +72,28 @@ tabButtons.forEach((button) => {
   });
 });
 
-// Функция для получения данных от бота и заполнения страницы
-async function fetchAndFillData() {
-  try {
-    // Здесь вы можете заменить URL на ваш сервер
-    const response = await fetch('/api/getConfig'); // предполагаем, что сервер возвращает конфиг
-    const config = await response.json();
+// Функция для получения config из URL
+function getConfigFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const encodedConfig = urlParams.get('config');
 
+  if (encodedConfig) {
+    try {
+      const decodedConfig = decodeURIComponent(encodedConfig);
+      return JSON.parse(decodedConfig);
+    } catch (error) {
+      console.error('Error decoding config:', error);
+      return null;
+    }
+  } else {
+    console.error('No config parameter found in URL');
+    return null;
+  }
+}
+
+// Функция для заполнения страницы данными из полученного config
+function fillPageWithData(config) {
+  if (config) {
     // Обновляем информацию о кошельке
     updateWalletInfo(config.wallet_address, config.tokens[0].amount);
 
@@ -90,10 +105,11 @@ async function fetchAndFillData() {
 
     // Создаем панели для транзакций
     config.transaction.forEach(createTransactionPanel);
-  } catch (error) {
-    console.error('Error fetching data:', error);
+  } else {
+    console.error('Config is invalid or not available');
   }
 }
 
-// Заполнение страницы данными из API
-fetchAndFillData();
+// Получаем и заполняем данные из URL-параметра
+const config = getConfigFromURL();
+fillPageWithData(config);
