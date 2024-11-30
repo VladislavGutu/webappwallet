@@ -11,8 +11,8 @@ body {
 }
 
 .wallet-container {
-  width: 100%;
-  max-width: 400px;
+  width: auto;
+  height: auto;
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
