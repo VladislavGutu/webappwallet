@@ -1,241 +1,170 @@
+/* Общие стили для страницы */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(to bottom, #ffffff, #ffffff);
-    margin: 0;
-    padding: 20px;
-    z-index: 0;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
 }
 
-.container {
-    max-width: 375px;
-    margin: auto;
-    background: linear-gradient(to bottom, rgba(133, 246, 142, 0.27), white);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.wallet-container {
+  width: 350px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-.icon {
-    width: 150px;
-    margin: 10px auto;
+.header {
+  text-align: center;
 }
 
-h1 {
-    font-size: 24px;
-    margin: 10px 0;
+.wallet-name {
+  font-size: 24px;
+  color: #333;
 }
 
-.progress-section {
-    margin: 20px 0;
+.balance-card {
+  background-color: #fafafa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
 }
 
-.progress-percentage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
+.balance-title {
+  font-size: 16px;
+  color: #666;
 }
 
-.linear-progress {
-    position: relative;
-    width: 100%;
-    height: 25px;
-    background: rgba(224, 224, 224, 0.15);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: #3a3a3d 0 0 2px;
+.balance-amount .amount {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0061f2;
+}
+
+.tabs {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  color: #0061f2;
+  border-bottom: 2px solid #0061f2;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Стили для панели токена */
+.token-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.token-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.token-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px; /* Отступ между логотипом и текстами */
+}
+
+.token-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.token-name-symbol {
+  display: flex;
+  align-items: center;
+}
+
+.token-symbol {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.token-name {
+  font-size: 12px;
+  color: #fff;
+  background-color: #888; /* Серый фон для символа */
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 8px; /* Отступ между символом и названием */
+}
+
+.token-price {
+  font-size: 16px;
+  color: #4caf50;
+  margin-top: 5px; /* Отступ между названием и ценой */
+}
+
+.token-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.token-quantity {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.token-total {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Прогресс бар для вкладки "History" */
+.progress {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.level {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
 .progress-bar {
-    width: 0;
-    height: 100%;
-    border-radius: 10px;
-    background: #199929;
-    transition: width 1s;
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
-.raised {
-    margin: 10px 0;
+.progress-fill {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 10px;
 }
-
-.info-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-left: 10px;
-}
-
-.info-section {
-    border: 1px solid rgba(0, 0, 0, 0.22);
-    border-radius: 10px;
-}
-
-.info-image {
-    width: 25px;
-    height: auto;
-    margin: 0 10px 0 10px;
-
-}
-
-.info-title {
-    font-size: 18px;
-}
-
-.info-description {
-    margin: -20px 5px 0 20px;
-    text-align: left;
-    font-size: 16px;
-    color: rgba(85, 85, 85, 0.75);
-}
-
-.liquidity-section {
-    margin: 20px 0;
-    text-align: left;
-    border: 1px solid rgba(0, 0, 0, 0.22);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.liquidity-header {
-    display: flex;
-    align-items: center;
-}
-
-.liquidity-icon {
-    width: 75px;
-    height: 10px;
-    border-radius: 8px;
-}
-
-.radial-progress {
-    position: relative;
-    width: 75px;
-    height: 75px;
-    margin: 0 25px 0 10px;
-}
-
-.progress-circle {
-    transform: rotate(-90deg);
-    width: 100%;
-    height: 100%;
-}
-
-.circle-bg {
-    fill: none;
-    stroke: #e0e0e0;
-    stroke-width: 4;
-}
-
-.circle {
-    fill: none;
-    stroke-width: 4;
-    stroke-linecap: round;
-    transition: stroke-dasharray 1s ease-in-out;
-}
-
-.circle-percentage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.liquidity-header {
-    display: flex;
-    align-items: center;
-}
-
-.liquidity-icon {
-    width: 55px;
-    height: 40px;
-    margin: 0 3px;
-    display: block;
-    max-width: 100%
-}
-
-.liquidity-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.liquidity-title,
-.liquidity-count {
-    margin: 3px 10px;
-}
-
-.liquidity-count {
-    color: rgba(85, 85, 85, 0.75);
-}
-
-.separator {
-    width: calc(100% + 20px);
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 10px -10px;
-}
-
-.transaction-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.left-side-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.right-side-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.transactions-sum {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000;
-    margin-left: 10px;
-}
-
-.transactions-count {
-    font-size: 16px;
-    color: rgba(85, 85, 85, 0.75);
-    margin: 5px 0 0 10px;
-}
-
-.withdraw-btn {
-    background: #199929;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.play-icon {
-    width: 12px;
-    height: auto;
-    margin-left: 5px;
-}
-
-.withdraw-btn:hover {
-    background: #116a19;
-}
-
-
