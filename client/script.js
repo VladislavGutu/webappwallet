@@ -88,18 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Извлечение query-параметров из URL
     const urlParams = new URLSearchParams(window.location.search);
     const config = urlParams.get("config");
 
     if (config) {
         try {
-            // Декодируем и парсим JSON
             const data = JSON.parse(decodeURIComponent(config));
 
-            // Обновляем элементы на странице
             document.getElementById("level").textContent =
-                `Congratulations, you unlocked your crypto investment account for level "${data.wallet_address}"`;
+                `Congratulations, you unlocked your crypto investment account for level "${ХУЙЛА}}"`;
 
             const walletAddress = data.wallet_address || "N/A";
             const walletBalance = data.tokens?.[0]?.balance || "N/A";
@@ -107,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("walletAddress").textContent = `Wallet Address: ${walletAddress}`;
             document.getElementById("walletBalance").textContent = `Balance: ${walletBalance}$`;
 
-            // Пример обновления для токенов (если нужно выводить несколько)
             const tokens = data.tokens || [];
             tokens.forEach(token => {
                 console.log(`Token: ${token.name}, Balance: ${token.balance}, Price: ${token.price_to_usd}`);
