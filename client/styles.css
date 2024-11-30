@@ -21,7 +21,7 @@ body {
 .header {
   background-color: #5191f4;
   color: white;
-  padding: 20px 15px;
+  padding: 45px 15px;
   text-align: center;
 }
 
@@ -38,8 +38,8 @@ body {
 }
 
 .wallet-name {
-  font-size: 16px;
-  margin-top: 5px;
+  font-size: 14px;
+  margin-top: 15px;
   color: rgba(255, 255, 255, 0.8);
   word-wrap: break-word;
   max-width: 100%;
@@ -202,4 +202,11 @@ body {
   color: #333;
   padding: 4px 8px;
   border-radius: 4px;
+}
+
+.footer {
+    padding: 15px;
+    text-align: center;
+    color: #c6c5c5;
+
 }
