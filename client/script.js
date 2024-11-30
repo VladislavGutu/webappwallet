@@ -36,25 +36,24 @@ function updateTotalBalance(tokens) {
   document.querySelector(".balance").textContent = `$${totalBalance.toFixed(2)}`;
 }
 
-function createRewardsPanel(transaction) {
-  const transactionPanel = document.createElement('div');
-  transactionPanel.classList.add('transaction-panel');
+function createRewardsPanel(reward) {
+  const rewardPanel = document.createElement('div');
+  rewardPanel.classList.add('rewards-panel');
 
-  transactionPanel.innerHTML = `
+rewardPanel.innerHTML = `
       <div class="rewards-info">
-          <img src="${transaction.logo}" alt="${transaction.symbol}" class="rewards-logo">
+          <img src="${reward.logo}" alt="${reward.symbol}" class="rewards-logo">
           <div class="rewards-details">
-              <span class="rewards-symbol">${transaction.symbol}</span>
-              <span class="rewards-amount">+${transaction.amount}</span>
+              <span class="rewards-symbol">${reward.symbol}</span>
+              <span class="rewards-amount">+${reward.amount}</span>
           </div>
       </div>
-      <div class="rewards-level">Level ${transaction.level}</div>
+      <div class="rewards-level">Level ${reward.level}</div>
   `;
 
-  document.getElementById('rewards-tab').appendChild(transactionPanel);
+  document.getElementById('rewards-tab').appendChild(rewardPanel);
 }
 
-// Обработка вкладок
 const tabButtons = document.querySelectorAll(".tab-button");
 const tabContents = document.querySelectorAll(".tab-content");
 
@@ -75,7 +74,6 @@ tabButtons.forEach((button) => {
   });
 });
 
-// Функция для получения данных конфигурации из URL
 function getConfigFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const encodedConfig = urlParams.get('config');
@@ -94,7 +92,6 @@ function getConfigFromURL() {
   }
 }
 
-// Функция для заполнения страницы данными из конфига
 function fillPageWithData(config) {
   if (config) {
     updateWalletInfo(config.wallet_address, config.tokens[0].amount);
@@ -103,18 +100,15 @@ function fillPageWithData(config) {
 
     updateTotalBalance(config.tokens);
 
-    // Исправлено имя свойства на `reward`, а не `transaction`
     config.reward.forEach(createRewardsPanel);
   } else {
     console.error('Config is invalid or not available');
   }
 }
 
-// Заполняем страницу данными из URL
 const config = getConfigFromURL();
 fillPageWithData(config);
 
-// Функции для попапа
 function showPopup() {
   const popup = document.getElementById("popup");
   popup.classList.add("visible");
@@ -134,5 +128,4 @@ document.getElementById("close-popup").addEventListener("click", function() {
   hidePopup();
 });
 
-// Начальное скрытие кнопки Withdraw
 document.getElementById("withdraw-button").style.display = 'none';
