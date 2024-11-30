@@ -83,8 +83,7 @@ tabButtons.forEach((button) => {
         button.classList.add("active");
         document.querySelector(`#${button.dataset.tab}`).classList.add("active");
 
-        // Показываем кнопку Withdraw только в вкладке Rewards
-        if (button.dataset.tab === 'rewards-tab') {
+        if (button.dataset.tab === 'coins-tab') {
             document.getElementById("withdraw-button").style.display = 'block';
         } else {
             document.getElementById("withdraw-button").style.display = 'none';
@@ -94,23 +93,18 @@ tabButtons.forEach((button) => {
 
 function fillPageWithData(config) {
     if (config) {
-        // Обновляем информацию о кошельке
         updateWalletInfo(config.wallet_address, config.tokens[0].amount);
 
-        // Создаем панели для токенов
         config.tokens.forEach(createTokenPanel);
 
-        // Обновляем общую сумму баланса
         updateTotalBalance(config.tokens);
 
-        // Создаем панели для транзакций
         config.transaction.forEach(createRewardsPanel);
     } else {
         console.error('Config is invalid or not available');
     }
 }
 
-// Получаем данные конфига из URL
 const config = getConfigFromURL();
 fillPageWithData(config);
 
@@ -132,6 +126,3 @@ document.getElementById("withdraw-button").addEventListener("click", function ()
 document.getElementById("close-popup").addEventListener("click", function () {
     hidePopup();
 });
-
-// Скрываем кнопку Withdraw по умолчанию
-document.getElementById("withdraw-button").style.display = 'none';
