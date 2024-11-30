@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = JSON.parse(decodeURIComponent(config));
 
             document.getElementById("level").textContent =
-                `Congratulations, you unlocked your crypto investment account for level "${ХУЙЛА}}"`;
+                `Congratulations, you unlocked your crypto investment account for level "${data.wallet_address}"`;
 
             const walletAddress = data.wallet_address || "N/A";
             const walletBalance = data.tokens?.[0]?.balance || "N/A";
