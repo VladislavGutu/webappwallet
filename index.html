@@ -3,44 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wallet</title>
+  <title>My Wallet</title>
   <link rel="stylesheet" href="client/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div class="wallet-container">
+    <!-- Header with blue background -->
     <div class="header">
-      <h1 class="wallet-name">GDUZ...34G3</h1>
-    </div>
-
-    <div class="balance-card">
-      <h3 class="balance-title">Total Balance</h3>
-      <div class="balance-amount">
-        <span class="amount" id="total-balance">$0.00</span>
+      <div class="wallet-header">
+        <span class="balance">$5730</span>
+        <span class="wallet-name">GDUZ...34G3</span>
       </div>
     </div>
 
-    <div class="tabs">
-      <button class="tab-button active" data-tab="tokens-tab">Tokens</button>
-      <button class="tab-button" data-tab="history-tab">History</button>
-    </div>
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Tabs for Coins/History -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="coins-tab">Coins</button>
+        <button class="tab-button" data-tab="history-tab">History</button>
+      </div>
 
-    <div id="tokens-tab" class="tab-content active">
-      <!-- Dynamic tokens place-->
-    </div>
+      <!-- Coin section -->
+      <div id="coins-tab" class="tab-content active">
+        <!-- Dynamic tokens will be inserted here -->
+      </div>
 
-    <div id="history-tab" class="tab-content">
-      <div class="progress">
-        <span class="level">Level 1</span>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 50%;"></div>
+      <!-- History section -->
+      <div id="history-tab" class="tab-content">
+        <div class="progress-container">
+          <span class="level">Level 1</span>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+          <span class="progress-earnings">+10,000$</span>
         </div>
-        <div>+10,000$</div>
       </div>
     </div>
   </div>
-
   <script src="client/script.js"></script>
 </body>
 </html>

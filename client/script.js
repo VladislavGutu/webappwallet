@@ -1,34 +1,47 @@
-// Моковые данные о токенах
 const tokensData = [
   {
-    "name": "Ethereum",
-    "symbol": "ETH",
-    "price": 2450.50,
-    "amount": 5.24,
-    "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.png"
+    name: "Bitcoin",
+    symbol: "BTC",
+    price: 67813.48,
+    amount: 0.1584,
+    logo: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
   },
   {
-    "name": "Binance Coin",
-    "symbol": "BNB",
-    "price": 420.30,
-    "amount": 12.14,
-    "logo": "https://cryptologos.cc/logos/binance-coin-bnb-logo.png"
+    name: "Binance Coin",
+    symbol: "BNB",
+    price: 643.23,
+    amount: 33,
+    logo: "https://cryptologos.cc/logos/binance-coin-bnb-logo.png",
   },
   {
-    "name": "Cardano",
-    "symbol": "ADA",
-    "price": 1.45,
-    "amount": 2000.50,
-    "logo": "https://cryptologos.cc/logos/cardano-ada-logo.png"
-  }
+    name: "Ethereum",
+    symbol: "ETH",
+    price: 4809.91,
+    amount: 1,
+    logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+  },
+  {
+    name: "Litecoin",
+    symbol: "LTC",
+    price: 40,
+    amount: 4,
+    logo: "https://cryptologos.cc/logos/litecoin-ltc-logo.png",
+  },
+  {
+    name: "XRP",
+    symbol: "XRP",
+    price: 1.24,
+    amount: 1000,
+    logo: "https://cryptologos.cc/logos/xrp-xrp-logo.png",
+  },
 ];
 
 function createTokenPanel(token) {
-  const tokenPanel = document.createElement('div');
-  tokenPanel.classList.add('token-panel');
+  const tokenPanel = document.createElement("div");
+  tokenPanel.classList.add("token-panel");
 
   tokenPanel.innerHTML = `
-    <div class="token-info">
+   <div class="token-info">
       <img src="${token.logo}" alt="${token.name}" class="token-logo">
       <div class="token-details">
         <div class="token-name-symbol">
@@ -44,32 +57,41 @@ function createTokenPanel(token) {
     </div>
   `;
 
-  document.getElementById('tokens-tab').appendChild(tokenPanel);
+  document.getElementById("coins-tab").appendChild(tokenPanel);
 }
 
 function updateTotalBalance() {
   let totalBalance = 0;
 
-  tokensData.forEach(token => {
+  tokensData.forEach((token) => {
     totalBalance += token.price * token.amount;
   });
 
-  document.getElementById('total-balance').textContent = `$${totalBalance.toFixed(2)}`;
+  document.querySelector(".balance").textContent = `$${totalBalance.toFixed(2)}`;
 }
 
-tokensData.forEach(createTokenPanel);
+function updateProgress(level, percentage, earnings) {
+  document.querySelector(".level").textContent = `Level ${level}`;
+  document.querySelector(".progress-fill").style.width = `${percentage}%`;
+  document.querySelector(".progress-earnings").textContent = `+${earnings}$`;
+}
 
-updateTotalBalance();
+const tabButtons = document.querySelectorAll(".tab-button");
+const tabContents = document.querySelectorAll(".tab-content");
 
-const tabButtons = document.querySelectorAll('.tab-button');
-const tabContents = document.querySelectorAll('.tab-content');
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    tabButtons.forEach((btn) => btn.classList.remove("active"));
+    tabContents.forEach((content) => content.classList.remove("active"));
 
-tabButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    tabContents.forEach(content => content.classList.remove('active'));
+    button.classList.add("active");
+    document.querySelector(`.tab-content#${button.dataset.tab}`).classList.add("active");
 
-    button.classList.add('active');
-    document.querySelector(`.tab-content#${button.dataset.tab}`).classList.add('active');
+    if (button.dataset.tab === "history-tab") {
+      setTimeout(() => updateProgress(1, 50, 10000), 500);
+    }
   });
 });
+
+tokensData.forEach(createTokenPanel);
+updateTotalBalance();
