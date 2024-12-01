@@ -78,13 +78,22 @@ body {
 .tab-content {
     display: none;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transform: translateX(100%); /* Начальная позиция для слайда */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Плавный переход для opacity и перемещения */
 }
 
 .tab-content.active {
     display: block;
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    transform: translateX(0); /* Конечная позиция для слайда */
+}
+
+.tab-content.left {
+    transform: translateX(-100%); /* Когда контент сдвигается влево */
+}
+
+.tab-content.right {
+    transform: translateX(100%); /* Когда контент сдвигается вправо */
 }
 
 .token-panel {
@@ -218,15 +227,15 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
+}
 
-  .popup-content {
+.popup-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     width: 300px;
-  }
+}
 
 .popup-content p {
     font-size: 16px;
@@ -249,7 +258,7 @@ body {
 
 .popup.visible {
     display: flex;
-  }
+}
 
 .close-btn {
     position: absolute;
@@ -258,7 +267,7 @@ body {
     cursor: pointer;
     font-size: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
 
 .hidden {
     display: none;

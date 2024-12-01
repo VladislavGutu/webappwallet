@@ -77,18 +77,27 @@ const tabContents = document.querySelectorAll(".tab-content");
 
 tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        const activeTabButton = document.querySelector(".tab-button.active");
+        const activeTabContent = document.querySelector(".tab-content.active");
+        const newTabContent = document.querySelector(`#${button.dataset.tab}`);
+
+        // Если выбранная вкладка уже активна, ничего не делаем
+        if (activeTabButton === button) return;
+
+        // Переключаем активную кнопку вкладки
         tabButtons.forEach((btn) => btn.classList.remove("active"));
-        tabContents.forEach((content) => content.classList.remove("active"));
-
         button.classList.add("active");
-        const activeTab = document.querySelector(`#${button.dataset.tab}`);
-        activeTab.classList.add("active");
 
-        if (button.dataset.tab === 'coins-tab') {
-            document.getElementById("withdraw-button").style.display = 'block'; // Показываем кнопку на coins-tab
-        } else if (button.dataset.tab === 'rewards-tab') {
-            document.getElementById("withdraw-button").style.display = 'none'; // Скрываем кнопку на rewards-tab
-        }
+        // Добавляем классы для анимации слайда
+        activeTabContent.classList.add('left'); // Сдвигаем старую вкладку влево
+        newTabContent.classList.add('right'); // Новая вкладка появляется справа
+
+        // После завершения анимации, показываем новую вкладку
+        setTimeout(() => {
+            activeTabContent.classList.remove("active", "left");
+            newTabContent.classList.remove("right");
+            newTabContent.classList.add("active");
+        }, 500); // Время, чтобы завершилась анимация
     });
 });
 
