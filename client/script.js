@@ -77,16 +77,13 @@ const tabContents = document.querySelectorAll(".tab-content");
 
 tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        // Убираем активные классы у всех кнопок и контентов
         tabButtons.forEach((btn) => btn.classList.remove("active"));
         tabContents.forEach((content) => content.classList.remove("active"));
 
-        // Добавляем класс активной кнопке и контенту
         button.classList.add("active");
         const activeTab = document.querySelector(`#${button.dataset.tab}`);
         activeTab.classList.add("active");
 
-        // Управление кнопкой Withdraw в зависимости от вкладки
         if (button.dataset.tab === 'coins-tab') {
             document.getElementById("withdraw-button").style.display = 'block'; // Показываем кнопку на coins-tab
         } else if (button.dataset.tab === 'rewards-tab') {
