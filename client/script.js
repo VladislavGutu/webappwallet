@@ -81,12 +81,13 @@ tabButtons.forEach((button) => {
         tabContents.forEach((content) => content.classList.remove("active"));
 
         button.classList.add("active");
-        document.querySelector(`#${button.dataset.tab}`).classList.add("active");
+        const activeTab = document.querySelector(`#${button.dataset.tab}`);
+        activeTab.classList.add("active");
 
         if (button.dataset.tab === 'coins-tab') {
-            document.getElementById("withdraw-button").style.display = 'block';
-        } else {
-            document.getElementById("withdraw-button").style.display = 'none';
+            document.getElementById("withdraw-button").style.display = 'block'; // Кнопка visible на coins-tab
+        } else if (button.dataset.tab === 'rewards-tab') {
+            document.getElementById("withdraw-button").style.display = 'none'; // Кнопка скрыта на rewards-tab
         }
     });
 });
