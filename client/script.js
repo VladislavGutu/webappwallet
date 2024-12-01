@@ -92,12 +92,12 @@ tabButtons.forEach((button) => {
         activeTabContent.classList.add('left'); // Сдвигаем старую вкладку влево
         newTabContent.classList.add('right'); // Новая вкладка появляется справа
 
-        // После завершения анимации, показываем новую вкладку
+        // Убираем анимацию с текущей вкладки и отображаем новую сразу
         setTimeout(() => {
             activeTabContent.classList.remove("active", "left");
             newTabContent.classList.remove("right");
             newTabContent.classList.add("active");
-        }, 500); // Время, чтобы завершилась анимация
+        }, 500); // Время для завершения анимации
     });
 });
 
