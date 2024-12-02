@@ -167,7 +167,7 @@ tabButtons.forEach((button) => {
 
                     nextTabContent.classList.remove("left");
                     nextTabContent.classList.add("active");
-                    withdrawButton.style.display = "block"; // Показываем кнопку
+                    withdrawButton.style.display = "block";
 
                     toggleTab(nextTab);
                 }, 350);
@@ -181,17 +181,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("popup");
     const closePopupButton = document.getElementById("close-popup");
 
-    // Открытие попапа
     withdrawButton.addEventListener("click", () => {
-        popup.style.display = "block"; // Показываем попап
+        popup.style.display = "block";
     });
 
-    // Закрытие попапа
     closePopupButton.addEventListener("click", () => {
-        popup.style.display = "none"; // Скрываем попап
+        popup.style.display = "none";
     });
 
-    // Закрытие попапа при клике вне его области (необязательно)
     window.addEventListener("click", (event) => {
         if (event.target === popup) {
             popup.style.display = "none";
