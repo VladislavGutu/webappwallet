@@ -11,16 +11,10 @@
 <div class="wallet-container">
     <div class="header">
         <div class="wallet-header">
-
-            <div class="wallet-name">
-                <span id="wallet-address"></span>
-            </div>
             <img src="assets/wallet.png" alt="wallet" class="wallet-logo">
             <div class="total-balance">
-                <span>Total balance:</span>
-                <div class="balance">0</div>
+                <div class="balance" id="balance">0</div>
             </div>
-
         </div>
     </div>
 
@@ -42,6 +36,12 @@
 
         <button id="withdraw-button" class="withdraw-button">Withdraw rewards</button>
     </div>
+
+    <footer class="footer">
+            <div class="wallet-name">
+                <span id="wallet-address"></span>
+            </div>
+    </footer>
 </div>
 
 <!-- Popup для вывода информации -->
