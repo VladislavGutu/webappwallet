@@ -154,7 +154,7 @@ tabButtons.forEach((button) => {
                     currentTabContent.innerHTML = "";
                     toggleTab("rewards-tab");
 
-                }, 350);
+                }, 175);
             } else if (nextTab === "coins-tab") {
 
                 currentTabContent.classList.add("right");
@@ -171,7 +171,7 @@ tabButtons.forEach((button) => {
                     withdrawButton.style.display = "block";
 
                     toggleTab(nextTab);
-                }, 350);
+                }, 175);
             }
         }
     });

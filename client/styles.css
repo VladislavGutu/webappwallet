@@ -25,23 +25,30 @@ body.page-loaded {
     overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .wallet-name {
+    margin-top: auto;
+    text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Вертикальное выравнивание */
     align-items: center;
 }
 
 .wallet-title {
     font-size: 10px;
     text-decoration: underline;
+    margin-bottom: 5px; /* Добавьте немного пространства между title и address */
 }
 
-.wallet-address{
+.wallet-address {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background-color: #808080;
     font-size: 14px;
 }
@@ -245,7 +252,7 @@ body.page-loaded {
     position: relative;
     width: 100%;
     transform: translateX(100%);
-    transition: transform 0.5s ease;
+    transition: transform 0.35s ease;
 }
 
 .tab-content.active {
@@ -490,11 +497,3 @@ body.page-loaded {
     background-color: #396fc9;
 }
 
-
-.footer {
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
