@@ -1,4 +1,4 @@
-const localConfig = {
+/*const localConfig = {
     wallet_address: "GDUZAK42IY56CH6RD5F4ONG7DH53K5GZIMKNWQ6RU2WYCNVVSKIY34G3",
     tokens: [
         {
@@ -30,7 +30,7 @@ const localConfig = {
             level: 5
         }
     ]
-};
+};*/
 
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -51,7 +51,7 @@ function getConfigFromURL() {
 }
 
 function getConfig() {
-    return localConfig || getConfigFromURL();
+    return /*localConfig || */getConfigFromURL();
 }
 
 
