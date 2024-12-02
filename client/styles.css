@@ -135,7 +135,8 @@ body {
 
 .tab-button.active {
     color: #5191f4;
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 -4px 3px #5191f4; /* Тень сверху */
 }
 
 .tab-content {
