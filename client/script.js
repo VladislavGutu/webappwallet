@@ -1,37 +1,3 @@
-const localConfig = {
-    wallet_address: "0x1234567890abcdef",
-    tokens: [
-        {
-            symbol: "BTC",
-            name: "Bitcoin",
-            logo: "https://example.com/btc-logo.png",
-            price: 45000,
-            amount: 1.23
-        },
-        {
-            symbol: "ETH",
-            name: "Ethereum",
-            logo: "https://example.com/eth-logo.png",
-            price: 3000,
-            amount: 5.45
-        }
-    ],
-    transaction: [
-        {
-            logo: "https://example.com/btc-logo.png",
-            symbol: "BTC",
-            amount: 150,
-            level: 3
-        },
-        {
-            logo: "https://example.com/eth-logo.png",
-            symbol: "ETH",
-            amount: 200,
-            level: 5
-        }
-    ]
-};
-
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedConfig = urlParams.get('config');
@@ -51,11 +17,20 @@ function getConfigFromURL() {
 }
 
 function getConfig() {
-    return /*localConfig || */getConfigFromURL();
+    return getConfigFromURL();
+}
+function formatWallet(wallet) {
+    if (wallet.length < 20) {
+        console.error("Wallet address is too short!");
+        return wallet;
+    }
+
+    return `${wallet.slice(0, 10)}.....${wallet.slice(-10)}`;
 }
 
 function updateWalletInfo(walletAddress, balance) {
-    document.getElementById('wallet-address').textContent = walletAddress;
+    const formattedWallet = formatWallet(walletAddress);
+    document.getElementById('wallet-address').textContent = formattedWallet;
     document.querySelector(".balance").textContent = `$${balance.toFixed(2)}`;
 }
 
@@ -98,19 +73,6 @@ function createRewardsPanel(transaction) {
   `;
 
     return rewardPanel;
-}
-
-function generateTabsContent(config) {
-    const coinsTab = document.getElementById("coins-tab");
-    const rewardsTab = document.getElementById("rewards-tab");
-
-    config.tokens.forEach(token => {
-        coinsTab.appendChild(createTokenPanel(token));
-    });
-
-    config.transaction.forEach(transaction => {
-        rewardsTab.appendChild(createRewardsPanel(transaction));
-    });
 }
 
 const tabButtons = document.querySelectorAll(".tab-button");
