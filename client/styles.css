@@ -78,34 +78,31 @@ body {
 .tab-content {
     position: relative;
     width: 100%;
-    transform: translateX(100%); /* Вкладки по умолчанию скрыты за пределами */
-    transition: transform 0.5s ease; /* Плавный сдвиг */
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
 }
 
-/* Вкладка активна, она будет по центру */
 .tab-content.active {
-    transform: translateX(0); /* Вкладка в центре */
+    transform: translateX(0);
 }
 
-/* Для сдвига вкладки влево */
 .tab-content.left {
-    transform: translateX(-100%); /* Сдвигаем вкладку влево */
+    transform: translateX(-100%);
 }
 
-/* Для сдвига вкладки вправо */
 .tab-content.right {
-    transform: translateX(100%); /* Сдвигаем вкладку вправо */
+    transform: translateX(100%);
 }
 
 .tokens-container, .rewards-container {
     opacity: 0;
-    transform: translateY(20px); /* Немного двигаем вниз для анимации */
+    transform: translateY(20px);
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .tokens-container.active, .rewards-container.active {
     opacity: 1;
-    transform: translateY(0); /* Контейнер будет подниматься */
+    transform: translateY(0);
 }
 
 .token-panel {
@@ -229,24 +226,23 @@ body {
 }
 
 .popup {
-    display: none; /* Скрыт по умолчанию */
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     z-index: 1000;
 }
 
+.popup.hidden {
+    display: none;
+}
+
 .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
     text-align: center;
-    width: 300px;
 }
 
 .popup-content p {
@@ -254,6 +250,7 @@ body {
     margin-bottom: 20px;
     color: #333;
 }
+
 
 .popup .close-popup {
     background-color: #5191f4;
@@ -266,6 +263,21 @@ body {
 
 .popup .close-popup:hover {
     background-color: #396fc9;
+}
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.popup-overlay.active,
+.popup.active {
+    display: block;
 }
 
 .popup.visible {
