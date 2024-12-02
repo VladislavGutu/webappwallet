@@ -67,14 +67,87 @@ body {
     align-items: center;
 }
 
+.star1, .star2, .star3, .star4, .star5
+{
+    position: absolute;
+    animation: pulse 5s infinite;
+    transform-origin: center;
+}
+
+.star1 {
+    top: 20px;
+    left: 10%;
+}
+
+.star2 {
+    top: 50px;
+    right: 15%;
+
+    width: 25px;
+    height: 36px;
+}
+
+.star3 {
+    bottom: 100px;
+    left: 20%;
+
+    width: 45px;
+    height: 35px;
+}
+
+.star4 {
+    bottom: 30px;
+    right: 5%;
+}
+
+.star5 {
+    top: 80px;
+    right: 2%;
+
+    width: 40px;
+    height: 40px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.35);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(.55);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(.35);
+        opacity: 1;
+    }
+}
+
+.wallet-icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .wallet-logo {
     width: 128px;
     height: 128px;
-
     margin-top: 10px;
-
     display: inline-block;
     animation: levitate 2s ease-in-out infinite;
+    z-index: 1; /* Кошелек должен быть выше тени */
+}
+
+.wallet-shadow {
+    width: 80px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 150px;
+    animation: shadow-resize 2s ease-in-out infinite;
+    z-index: 0;
 }
 
 @keyframes levitate {
@@ -89,10 +162,22 @@ body {
     }
 }
 
+@keyframes shadow-resize {
+    0% {
+        transform: scale(1.45);
+    }
+    50% {
+        transform: scale(1.25); /* Уменьшить тень, когда кошелек поднимается */
+    }
+    100% {
+        transform: scale(1.45);
+    }
+}
+
 .total-balance {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 30px;
     color: #8e8e8e;
     z-index: 999;
     padding: 0 10px;
