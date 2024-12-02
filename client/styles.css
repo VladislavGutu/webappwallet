@@ -78,22 +78,22 @@ body {
 .tab-content {
     display: none;
     opacity: 0;
-    transform: translateX(100%); /* Начальная позиция вкладки */
+    transform: translateX(0); /* Начальная позиция */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .tab-content.active {
     display: block;
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0); /* Позиция для активного контента */
 }
 
 .tab-content.left {
-    transform: translateX(-100%); /* Когда контент сдвигается влево */
+    transform: translateX(-100%); /* Уход влево */
 }
 
 .tab-content.right {
-    transform: translateX(100%); /* Когда контент сдвигается вправо */
+    transform: translateX(100%); /* Уход вправо */
 }
 
 .token-panel {
