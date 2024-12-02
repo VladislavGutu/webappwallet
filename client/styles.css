@@ -70,13 +70,14 @@ body {
     font-weight: bold;
     margin-top: 15px;
     color: black;
+    z-index: 999;
+
 }
 
 .balance {
     font-size: 32px;
     font-weight: bold;
     color: black;
-    z-index: 2;
 }
 
 .wallet-name {
