@@ -20,12 +20,14 @@ const localConfig = {
         {
             logo: "https://example.com/btc-logo.png",
             symbol: "BTC",
+            name: "Bitcoin",
             amount: 150,
             level: 3
         },
         {
             logo: "https://example.com/eth-logo.png",
             symbol: "ETH",
+            name: "Ethereum",
             amount: 200,
             level: 5
         }
@@ -100,7 +102,10 @@ function createRewardsPanel(transaction) {
       <div class="rewards-info">
           <img src="${transaction.logo}" alt="${transaction.symbol}" class="rewards-logo">
           <div class="rewards-details">
-              <span class="rewards-symbol">${transaction.symbol}</span>
+              <div class="rewards-name-symbol">
+                  <span class="rewards-symbol">${transaction.symbol}</span>
+                  <span class="rewards-name">${transaction.name}</span>
+              </div>
               <span class="rewards-amount">+$${transaction.amount}</span>
           </div>
       </div>
