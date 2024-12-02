@@ -99,7 +99,6 @@ body {
 }
 
 .main-content {
-    /*padding: 15px;*/
     background-color: #ffffff;
 }
 
@@ -110,21 +109,26 @@ body {
 }
 
 .tab-button {
-    background: none;
     border: none;
     font-size: 16px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #666;
+    color: #ffffff;
+    background-color: rgba(99, 99, 99, 0.3);
+
     cursor: pointer;
     padding: 10px 20px;
     width: 50%;
     text-align: center;
+    border-top-left-radius: 10px; /* Закругление верхнего левого угла */
+    border-top-right-radius: 10px; /* Закругление верхнего правого угла */
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Тень сверху */
+    z-index: 999;
 }
 
 .tab-button.active {
     color: #5191f4;
-    border-bottom: 2px solid #5191f4;
+    background-color: #ffffff;
 }
 
 .tab-content {
