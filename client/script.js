@@ -44,16 +44,6 @@ function createTokenPanel(token) {
     document.getElementById("coins-tab").appendChild(tokenPanel);
 }
 
-function updateTotalBalance(tokens) {
-    let totalBalance = 0;
-
-    tokens.forEach((token) => {
-        totalBalance += token.price * token.amount;
-    });
-
-    document.querySelector(".balance").textContent = `$${totalBalance.toFixed(2)}`;
-}
-
 function createRewardsPanel(transaction) {
     const rewardPanel = document.createElement('div');
     rewardPanel.classList.add('rewards-panel');
@@ -72,6 +62,18 @@ function createRewardsPanel(transaction) {
     document.getElementById('rewards-tab').appendChild(rewardPanel);
 }
 
+function fillPageWithData(config) {
+    if (config) {
+        updateWalletInfo(config.wallet_address, config.tokens[0].amount);
+
+        config.tokens.forEach(createTokenPanel);
+
+        config.transaction.forEach(createRewardsPanel);
+    } else {
+        console.error('Config is invalid or not available');
+    }
+}
+
 const tabButtons = document.querySelectorAll(".tab-button");
 const tabContents = document.querySelectorAll(".tab-content");
 
@@ -83,44 +85,37 @@ tabButtons.forEach((button) => {
 
         if (activeTabButton === button) return;
 
-        // Сброс активного состояния у кнопок
+        // Сброс активного состояния кнопок
         tabButtons.forEach((btn) => btn.classList.remove("active"));
         button.classList.add("active");
 
-        // Логика анимации
+        // Генерация контента новой вкладки
         if (button.dataset.tab === "rewards-tab") {
-            activeTabContent.classList.add('left'); // Coins уходит влево
+            newTabContent.innerHTML = ""; // Очищаем контент перед заполнением
+            config.transaction.forEach(createRewardsPanel); // Rewards
         } else if (button.dataset.tab === "coins-tab") {
-            activeTabContent.classList.add('right'); // Rewards уходит вправо
+            newTabContent.innerHTML = ""; // Очищаем контент перед заполнением
+            config.tokens.forEach(createTokenPanel); // Coins
         }
 
-        newTabContent.classList.add('right'); // Новая вкладка появляется справа
+        // Анимация
+        if (button.dataset.tab === "rewards-tab") {
+            activeTabContent.classList.add("left");
+        } else if (button.dataset.tab === "coins-tab") {
+            activeTabContent.classList.add("right");
+        }
+
+        newTabContent.classList.add("right");
+
         setTimeout(() => {
             activeTabContent.classList.remove("active", "left", "right");
             newTabContent.classList.remove("right", "left");
             newTabContent.classList.add("active");
-        }, 500); // Время завершения анимации
+        }, 500);
     });
 });
 
-
-function fillPageWithData(config) {
-    if (config) {
-        updateWalletInfo(config.wallet_address, config.tokens[0].amount);
-
-        config.tokens.forEach(createTokenPanel);
-
-        updateTotalBalance(config.tokens);
-
-        config.transaction.forEach(createRewardsPanel);
-    } else {
-        console.error('Config is invalid or not available');
-    }
-}
-
-const config = getConfigFromURL();
-fillPageWithData(config);
-
+// Обработка попапа
 function showPopup() {
     const popup = document.getElementById("popup");
     popup.classList.add("visible");
@@ -131,11 +126,8 @@ function hidePopup() {
     popup.classList.remove("visible");
 }
 
-document.getElementById("withdraw-button").addEventListener("click", function () {
-    console.log('Withdraw button clicked');
-    showPopup();
-});
+document.getElementById("withdraw-button").addEventListener("click", showPopup);
+document.getElementById("close-popup").addEventListener("click", hidePopup);
 
-document.getElementById("close-popup").addEventListener("click", function () {
-    hidePopup();
-});
+const config = getConfigFromURL();
+fillPageWithData(config);
