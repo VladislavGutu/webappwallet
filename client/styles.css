@@ -57,6 +57,8 @@ body {
     width: 128px;
     height: 128px;
 
+    margin-top: 10px;
+
     display: inline-block;
     animation: levitate 2s ease-in-out infinite;
 }
