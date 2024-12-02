@@ -1,3 +1,39 @@
+// Локальный конфиг для дебага
+const localConfig = {
+    wallet_address: "0x1234567890abcdef",
+    tokens: [
+        {
+            symbol: "BTC",
+            name: "Bitcoin",
+            logo: "https://example.com/btc-logo.png",
+            price: 45000,
+            amount: 1.23
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        }
+    ],
+    transaction: [
+        {
+            logo: "https://example.com/btc-logo.png",
+            symbol: "BTC",
+            amount: 150,
+            level: 3
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            amount: 200,
+            level: 5
+        }
+    ]
+};
+
+// Функция для получения конфигурации из URL
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedConfig = urlParams.get('config');
@@ -16,11 +52,18 @@ function getConfigFromURL() {
     }
 }
 
+// Получение конфигурации: если есть локальный конфиг для дебага, используем его, иначе — конфиг из URL
+function getConfig() {
+    return localConfig || getConfigFromURL();
+}
+
+// Функция для обновления информации о кошельке
 function updateWalletInfo(walletAddress, balance) {
     document.getElementById('wallet-address').textContent = walletAddress;
     document.querySelector(".balance").textContent = `$${balance.toFixed(2)}`;
 }
 
+// Функция для создания панели токенов
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
     tokenPanel.classList.add("token-panel");
@@ -41,9 +84,10 @@ function createTokenPanel(token) {
         <span class="token-total">~$${(token.price * token.amount).toFixed(2)}</span>
     </div>`;
 
-    document.getElementById("coins-tab").appendChild(tokenPanel);
+    return tokenPanel;
 }
 
+// Функция для создания панели вознаграждений
 function createRewardsPanel(transaction) {
     const rewardPanel = document.createElement('div');
     rewardPanel.classList.add('rewards-panel');
@@ -59,75 +103,105 @@ function createRewardsPanel(transaction) {
       <div class="rewards-level">Level ${transaction.level}</div>
   `;
 
-    document.getElementById('rewards-tab').appendChild(rewardPanel);
+    return rewardPanel;
 }
 
-function fillPageWithData(config) {
-    if (config) {
-        updateWalletInfo(config.wallet_address, config.tokens[0].amount);
+// Функция для генерации контента для вкладок
+function generateTabsContent(config) {
+    const coinsTab = document.getElementById("coins-tab");
+    const rewardsTab = document.getElementById("rewards-tab");
 
-        config.tokens.forEach(createTokenPanel);
-        config.transaction.forEach(createRewardsPanel);
-    } else {
-        console.error('Config is invalid or not available');
+    // Генерация контента для вкладки Coins
+    config.tokens.forEach(token => {
+        coinsTab.appendChild(createTokenPanel(token));
+    });
+
+    // Генерация контента для вкладки Rewards
+    config.transaction.forEach(transaction => {
+        rewardsTab.appendChild(createRewardsPanel(transaction));
+    });
+}
+
+
+const tabButtons = document.querySelectorAll(".tab-button");
+
+// Функция для обновления контента вкладки
+function toggleTab(activeTab) {
+    const tabs = document.querySelectorAll(".tab-content");
+
+    // Удаляем все активные классы
+    tabs.forEach(tab => {
+        tab.classList.remove("active", "left", "right");
+    });
+
+    const activeTabContent = document.querySelector(`#${activeTab}`);
+    activeTabContent.classList.add("active");
+
+    // Генерация контента для активной вкладки
+    if (activeTab === "rewards-tab") {
+        config.transaction.forEach(transaction => {
+            activeTabContent.appendChild(createRewardsPanel(transaction));
+        });
+    } else if (activeTab === "coins-tab") {
+        config.tokens.forEach(token => {
+            activeTabContent.appendChild(createTokenPanel(token));
+        });
     }
 }
 
-const tabButtons = document.querySelectorAll(".tab-button");
-const tabContents = document.querySelectorAll(".tab-content");
-
+// Обработчик для переключения вкладок
 tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const activeTabButton = document.querySelector(".tab-button.active");
         const activeTabContent = document.querySelector(".tab-content.active");
-        const newTabContent = document.querySelector(`#${button.dataset.tab}`);
 
-        if (activeTabButton === button) return;
+        // Если текущая кнопка не активная
+        if (activeTabButton !== button) {
+            // Сброс активного состояния кнопок
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
 
-        // Сброс активного состояния кнопок
-        tabButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
+            // Очищаем текущий контент перед загрузкой нового
+            const nextTab = button.dataset.tab;
+            const currentTabContent = document.querySelector(`#${activeTabContent.id}`);
 
-        // Генерация контента до анимации
-        newTabContent.innerHTML = ""; // Очищаем контент перед заполнением
-        if (button.dataset.tab === "rewards-tab") {
-            config.transaction.forEach(createRewardsPanel); // Генерация контента вкладки Rewards
-            document.getElementById("withdraw-button").classList.add("hidden"); // Скрываем кнопку на Rewards
-        } else if (button.dataset.tab === "coins-tab") {
-            config.tokens.forEach(createTokenPanel); // Генерация контента вкладки Coins
-            document.getElementById("withdraw-button").classList.remove("hidden"); // Показываем кнопку на Coins
+            // Переход на вкладку "Rewards" (сдвигаем контент влево)
+            if (nextTab === "rewards-tab") {
+                currentTabContent.classList.add("left");  // Сдвигаем контент влево
+                setTimeout(() => {
+                    // Очищаем текущий контент
+                    currentTabContent.innerHTML = "";
+                    toggleTab("rewards-tab");  // Загружаем новый контент
+                }, 500);  // Пауза для завершения анимации
+
+                // Переход на вкладку "Coins" (сдвигаем контент вправо)
+            } else if (nextTab === "coins-tab") {
+                // Текущая вкладка ("Rewards") сдвигается вправо
+                currentTabContent.classList.add("right");
+
+                // Новая вкладка ("Coins") приходит слева
+                const nextTabContent = document.querySelector(`#${nextTab}`);
+                nextTabContent.classList.add("left");
+
+                setTimeout(() => {
+                    // Удаляем старый контент из текущей вкладки
+                    currentTabContent.innerHTML = "";
+                    currentTabContent.classList.remove("active", "right");
+
+                    // Подготавливаем новую вкладку
+                    nextTabContent.classList.remove("left");
+                    nextTabContent.classList.add("active");
+
+                    // Обновляем контент новой вкладки
+                    toggleTab(nextTab);
+                }, 500); // Ждем завершения анимации
+            }
+
         }
-
-        // Анимация
-        if (button.dataset.tab === "rewards-tab") {
-            activeTabContent.classList.add("left");
-        } else if (button.dataset.tab === "coins-tab") {
-            activeTabContent.classList.add("right");
-        }
-
-        newTabContent.classList.add("right");
-
-        setTimeout(() => {
-            activeTabContent.classList.remove("active", "left", "right");
-            newTabContent.classList.remove("right", "left");
-            newTabContent.classList.add("active");
-        }, 500); // Время завершения анимации
     });
 });
 
-// Обработка попапа
-function showPopup() {
-    const popup = document.getElementById("popup");
-    popup.classList.add("visible");
-}
-
-function hidePopup() {
-    const popup = document.getElementById("popup");
-    popup.classList.remove("visible");
-}
-
-document.getElementById("withdraw-button").addEventListener("click", showPopup);
-document.getElementById("close-popup").addEventListener("click", hidePopup);
-
-const config = getConfigFromURL();
-fillPageWithData(config);
+// Изначально показываем вкладку "coins-tab"
+const config = getConfig();
+toggleTab('coins-tab'); // Изначально показываем вкладку "coins-tab"
+updateWalletInfo(config.wallet_address, config.balance);

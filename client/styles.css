@@ -76,24 +76,36 @@ body {
 }
 
 .tab-content {
-    display: none;
-    opacity: 0;
-    transform: translateX(0); /* Начальная позиция */
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: relative;
+    width: 100%;
+    transform: translateX(100%); /* Вкладки по умолчанию скрыты за пределами */
+    transition: transform 0.5s ease; /* Плавный сдвиг */
 }
 
+/* Вкладка активна, она будет по центру */
 .tab-content.active {
-    display: block;
-    opacity: 1;
-    transform: translateX(0); /* Позиция для активного контента */
+    transform: translateX(0); /* Вкладка в центре */
 }
 
+/* Для сдвига вкладки влево */
 .tab-content.left {
-    transform: translateX(-100%); /* Уход влево */
+    transform: translateX(-100%); /* Сдвигаем вкладку влево */
 }
 
+/* Для сдвига вкладки вправо */
 .tab-content.right {
-    transform: translateX(100%); /* Уход вправо */
+    transform: translateX(100%); /* Сдвигаем вкладку вправо */
+}
+
+.tokens-container, .rewards-container {
+    opacity: 0;
+    transform: translateY(20px); /* Немного двигаем вниз для анимации */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.tokens-container.active, .rewards-container.active {
+    opacity: 1;
+    transform: translateY(0); /* Контейнер будет подниматься */
 }
 
 .token-panel {
