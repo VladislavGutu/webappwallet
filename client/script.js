@@ -1,37 +1,3 @@
-const localConfig = {
-    wallet_address: "GDUZAK42IY56CH6RD5F4ONG7DH53K5GZIMKNWQ6RU2WYCNVVSKIY34G3",
-    tokens: [
-        {
-            symbol: "BTC",
-            name: "Bitcoin",
-            logo: "https://example.com/btc-logo.png",
-            price: 45000,
-            amount: 1.23
-        },
-        {
-            symbol: "ETH",
-            name: "Ethereum",
-            logo: "https://example.com/eth-logo.png",
-            price: 3000,
-            amount: 5.45
-        }
-    ],
-    transaction: [
-        {
-            logo: "https://example.com/btc-logo.png",
-            symbol: "BTC",
-            amount: 150,
-            level: 3
-        },
-        {
-            logo: "https://example.com/eth-logo.png",
-            symbol: "ETH",
-            amount: 200,
-            level: 5
-        }
-    ]
-};
-
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedConfig = urlParams.get('config');
@@ -51,7 +17,7 @@ function getConfigFromURL() {
 }
 
 function getConfig() {
-    return localConfig || getConfigFromURL();
+    return getConfigFromURL();
 }
 
 
