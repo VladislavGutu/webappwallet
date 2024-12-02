@@ -54,6 +54,9 @@ function getConfig() {
     return /*localConfig || */getConfigFromURL();
 }
 
+ window.addEventListener("load", () => {
+        document.body.classList.add("page-loaded");
+    });
 
 function updateWalletInfo(walletAddress, tokens) {
     document.getElementById('wallet-address').textContent = `${walletAddress}`;

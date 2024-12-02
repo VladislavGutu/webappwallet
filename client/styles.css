@@ -10,6 +10,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.page-loaded {
+    opacity: 1;
 }
 
 .wallet-container {
