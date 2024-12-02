@@ -19,10 +19,24 @@ body {
 }
 
 .header {
-    background-color: #5191f4;
+    position: relative;
+    background: linear-gradient(88deg, rgba(0, 204, 255, 0.6), rgba(0, 170, 255, 0.42), rgba(132, 94, 194, 0.6));
     color: white;
     padding: 45px 15px;
     text-align: center;
+    overflow: hidden; /* предотвращает выход содержимого за пределы */
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    z-index: 1;
 }
 
 .wallet-header {
@@ -31,15 +45,43 @@ body {
     align-items: center;
 }
 
+.wallet-logo {
+    width: 128px;
+    height: 128px;
+
+    display: inline-block;
+    animation: levitate 2s ease-in-out infinite;
+}
+
+@keyframes levitate {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.total-balance {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: black;
+}
+
 .balance {
     font-size: 32px;
     font-weight: bold;
-    color: white;
+    color: black;
+    z-index: 2;
 }
 
 .wallet-name {
-    font-size: 14px;
-    margin-top: 15px;
+    font-size: 20px;
+    margin-bottom: 15px;
     color: rgba(255, 255, 255, 0.8);
     word-wrap: break-word;
     max-width: 100%;
@@ -48,7 +90,6 @@ body {
 .main-content {
     padding: 15px;
     background-color: #ffffff;
-    border-top: 1px solid #e0e0e0;
 }
 
 .tabs {
@@ -264,6 +305,7 @@ body {
 .popup .close-popup:hover {
     background-color: #396fc9;
 }
+
 .popup-overlay {
     position: fixed;
     top: 0;
