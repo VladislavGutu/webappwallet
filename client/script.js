@@ -1,40 +1,64 @@
-let config = null;
+const localConfig = {
+    wallet_address: "GDUZAK42IY56CH6RD5F4ONG7DH53K5GZIMKNWQ6RU2WYCNVVSKIY34G3",
+    tokens: [
+        {
+            symbol: "BTC",
+            name: "Bitcoin",
+            logo: "https://example.com/btc-logo.png",
+            price: 45000,
+            amount: 1.23
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        }
+    ],
+    transaction: [
+        {
+            logo: "https://example.com/btc-logo.png",
+            symbol: "BTC",
+            name: "Bitcoin",
+            amount: 150,
+            level: 3
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        }
+    ]
+};
 
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedConfig = urlParams.get('config');
-    if (!encodedConfig) {
-        return null;
-    }
-    return encodedConfig;
-}
 
-async function fetchData(userId) {
-    try {
-        const response = await fetch(`http://localhost:8000/miniapp/data/${userId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Ошибка: ${response.statusText}`);
+    if (encodedConfig) {
+        try {
+            const decodedConfig = decodeURIComponent(encodedConfig);
+            return JSON.parse(decodedConfig);
+        } catch (error) {
+            console.error('Error decoding config:', error);
+            return null;
         }
-
-        const data = await response.json();
-        const decodedConfig = decodeURIComponent(data);
-        return JSON.parse(decodedConfig);
-
-    } catch (error) {
-        console.error("Ошибка при получении данных:", error);
+    } else {
+        console.error('No config parameter found in URL');
         return null;
     }
 }
 
-function ShowContent() {
-    document.body.classList.add("page-loaded");
+function getConfig() {
+    return /*localConfig || */getConfigFromURL();
 }
+
+window.addEventListener("load", () => {
+    document.body.classList.add("page-loaded");
+});
 
 function updateWalletInfo(walletAddress, tokens) {
     document.getElementById('wallet-address').textContent = `${walletAddress}`;
@@ -70,6 +94,7 @@ function createTokenPanel(token) {
     return tokenPanel;
 }
 
+// Функция для создания панели с наградами
 function createRewardsPanel(transaction) {
     const rewardPanel = document.createElement('div');
     rewardPanel.classList.add('rewards-panel');
@@ -91,10 +116,11 @@ function createRewardsPanel(transaction) {
     return rewardPanel;
 }
 
+// Переключение между вкладками
 const tabButtons = document.querySelectorAll(".tab-button");
 const withdrawButton = document.getElementById("withdraw-button");
 
-function toggleTab(activeTab, config) {
+function toggleTab(activeTab) {
     const tabs = document.querySelectorAll(".tab-content");
 
     tabs.forEach(tab => {
@@ -133,7 +159,8 @@ tabButtons.forEach((button) => {
 
                 setTimeout(() => {
                     currentTabContent.innerHTML = "";
-                    toggleTab("rewards-tab", config);
+                    toggleTab("rewards-tab");
+
                 }, 175);
             } else if (nextTab === "coins-tab") {
 
@@ -150,28 +177,11 @@ tabButtons.forEach((button) => {
                     nextTabContent.classList.add("active");
                     withdrawButton.style.display = "block";
 
-                    toggleTab(nextTab, config);
+                    toggleTab(nextTab);
                 }, 175);
             }
         }
     });
-});
-
-document.addEventListener("DOMContentLoaded", async () => {
-    let user_id = getConfigFromURL();
-    if (!user_id) {
-        user_id = 350104566;
-    }
-    config = await fetchData(user_id);
-
-    if (config) {
-        console.log("config:", config);
-        toggleTab('coins-tab', config);
-        updateWalletInfo(config.wallet_address, config.tokens);
-        ShowContent();
-    } else {
-        console.error("Не удалось загрузить конфигурацию.");
-    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -194,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Копирование адреса кошелька в буфер обмена
 document.addEventListener("DOMContentLoaded", function () {
     const walletAddressElement = document.getElementById("wallet-address");
 
@@ -210,3 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Wallet Address copied to clipboard!");
     });
 });
+
+const config = getConfig();
+toggleTab('coins-tab');
+updateWalletInfo(config.wallet_address, config.tokens);
