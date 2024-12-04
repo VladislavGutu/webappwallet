@@ -12,7 +12,6 @@ body {
     align-items: center;
     opacity: 0;
     transition: opacity 1s ease-in;
-    overflow: hidden;
 }
 
 body.page-loaded {
@@ -29,9 +28,6 @@ body.page-loaded {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
-    /*overflow-y: auto;*/
-    /*-webkit-overflow-scrolling: touch;*/
 }
 
 .wallet-name {
@@ -227,14 +223,6 @@ body.page-loaded {
     margin-bottom: 15px;
 }
 
-.tabs-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    max-height: calc(100vh - 300px);
-    box-sizing: border-box;
-    padding-bottom: 20px;
-}
-
 .tab-button {
     border: none;
     font-size: 16px;
@@ -264,9 +252,6 @@ body.page-loaded {
     width: 100%;
     transform: translateX(100%);
     transition: transform 0.35s ease;
-
-    max-height: 300px;
-    overflow-y: auto;
 }
 
 .tab-content.active {
