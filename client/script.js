@@ -14,6 +14,69 @@ const localConfig = {
             logo: "https://example.com/eth-logo.png",
             price: 3000,
             amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
+        },
+        {
+            symbol: "ETH",
+            name: "Ethereum",
+            logo: "https://example.com/eth-logo.png",
+            price: 3000,
+            amount: 5.45
         }
     ],
     transaction: [
