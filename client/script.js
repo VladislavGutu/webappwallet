@@ -169,6 +169,7 @@ function toggleTab(activeTab) {
     activeTabContent.classList.add("active");
 
     if (activeTab === "rewards-tab") {
+
         config.transaction.forEach(transaction => {
             activeTabContent.appendChild(createRewardsPanel(transaction));
         });
@@ -196,6 +197,8 @@ tabButtons.forEach((button) => {
                 withdrawButton.style.display = "none";
 
                 setTimeout(() => {
+                window.scrollTo(0, 0);
+
                     currentTabContent.innerHTML = "";
                     toggleTab("rewards-tab");
 

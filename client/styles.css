@@ -30,22 +30,22 @@ body.page-loaded {
     flex-direction: column;
     justify-content: flex-end;
 
-    overflow-y: auto; /* Включение скролла для основного контейнера */
-    -webkit-overflow-scrolling: touch; /* Плавный скролл на мобильных устройствах */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .wallet-name {
     margin-top: auto;
     text-align: center;
     display: flex;
-    flex-direction: column; /* Вертикальное выравнивание */
+    flex-direction: column;
     align-items: center;
 }
 
 .wallet-title {
     font-size: 10px;
     text-decoration: underline;
-    margin-bottom: 5px; /* Добавьте немного пространства между title и address */
+    margin-bottom: 5px;
 }
 
 .wallet-address {
