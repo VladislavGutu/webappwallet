@@ -164,8 +164,9 @@ function getConfigFromURL() {
     }
 }
 
+
 function getConfig() {
-    return /*localConfig || */getConfigFromURL();
+    return localConfig || getConfigFromURL();
 }
 
 window.addEventListener("load", () => {
