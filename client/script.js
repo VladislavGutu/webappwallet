@@ -197,7 +197,7 @@ tabButtons.forEach((button) => {
                 withdrawButton.style.display = "none";
 
                 setTimeout(() => {
-                window.scrollTo(0, 0);
+                // window.scrollTo(0, -100);
 
                     currentTabContent.innerHTML = "";
                     toggleTab("rewards-tab");
