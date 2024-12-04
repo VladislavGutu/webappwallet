@@ -271,8 +271,6 @@ body.page-loaded {
     width: 100%;
     transform: translateX(100%);
     transition: transform 0.35s ease;
-     max-height: 100%; /* Чтобы вкладки не выходили за пределы контейнера */
-    overflow-y: auto;
 }
 
 .tab-content.active {
