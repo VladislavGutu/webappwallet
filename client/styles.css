@@ -408,7 +408,13 @@ body.page-loaded {
 .rewards-amount {
     font-size: 16px;
     color: #4caf50;
-    margin-top: 5px; /* Расстояние между name и amount */
+    margin-top: 5px;
+}
+
+.rewards-text {
+    font-size: 12px;
+    color: #8e8e8e;
+    margin-top: 5px;
 }
 
 .rewards-level {

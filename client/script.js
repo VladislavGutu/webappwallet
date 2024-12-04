@@ -53,7 +53,7 @@ function getConfigFromURL() {
 }
 
 function getConfig() {
-    return /*localConfig || */getConfigFromURL();
+    return localConfig || getConfigFromURL();
 }
 
 window.addEventListener("load", () => {
@@ -108,6 +108,7 @@ function createRewardsPanel(transaction) {
                   <span class="rewards-name">${transaction.name}</span>
               </div>
               <span class="rewards-amount">+$${transaction.amount}</span>
+              <span class="rewards-text">Crypto account given for being a level ${transaction.level} investor.</span>
           </div>
       </div>
       <div class="rewards-level">Level ${transaction.level}</div>
