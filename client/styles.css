@@ -257,7 +257,7 @@ body.page-loaded {
     transform: translateX(100%);
     transition: transform 0.35s ease;
 
-    max-height: 500px;
+    max-height: 300px;
     overflow-y: auto;
 }
 
