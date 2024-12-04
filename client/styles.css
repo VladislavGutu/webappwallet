@@ -307,8 +307,8 @@ body.page-loaded {
 
 .rewards-info {
     display: flex;
-    justify-content: space-between; /* Разделить элементы на две части */
-    align-items: center; /* Вертикальное выравнивание */
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -422,7 +422,6 @@ body.page-loaded {
     color: #333;
     padding: 4px 8px;
     border-radius: 4px;
-    margin-top: 10px;
     white-space: nowrap;
 }
 
