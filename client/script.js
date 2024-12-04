@@ -65,6 +65,20 @@ const localConfig = {
             name: "Ethereum",
             amount: 200,
             level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
         }
     ]
 };

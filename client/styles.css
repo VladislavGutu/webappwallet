@@ -236,10 +236,10 @@ body.page-loaded {
 
 .tabs-content {
     flex-grow: 1;
-    overflow-y: auto; /* Вертикальный скролл для содержимого вкладок */
-    max-height: calc(100vh - 500px); /* Убедитесь, что вкладки не занимают больше, чем свободное пространство */
+    overflow-y: auto;
+    max-height: calc(100vh - 500px);
     box-sizing: border-box;
-    padding-bottom: 20px; /* Добавление отступа для скроллинга */
+    padding-bottom: 20px;
 }
 
 .tab-button {
