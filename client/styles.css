@@ -394,6 +394,8 @@ body.page-loaded {
     border-radius: 4px;
     margin-left: auto;
     align-self: center;
+    white-space: nowrap;
+
 }
 
 .popup {
