@@ -31,7 +31,7 @@ body.page-loaded {
     justify-content: flex-end;
 
     /*overflow-y: auto;*/
-    -webkit-overflow-scrolling: touch;
+    /*-webkit-overflow-scrolling: touch;*/
 }
 
 .wallet-name {
@@ -234,6 +234,7 @@ body.page-loaded {
     box-sizing: border-box;
     padding-bottom: 20px;
 }
+
 .tab-button {
     border: none;
     font-size: 16px;
