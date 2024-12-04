@@ -3,36 +3,27 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background: #f0f0f0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     opacity: 0;
     transition: opacity 1s ease-in;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body.page-loaded {
     opacity: 1;
 }
 
-.main-container {
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    flex-direction: column;
-}
-
 .wallet-container {
     max-width: 600px;
-    height: 100%;
+    /*height: 100%;*/
     width: 100%;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -238,9 +229,8 @@ body.page-loaded {
 .tabs-content {
     /*flex-grow: 1;*/
     overflow-y: auto;
-    max-height: calc(100vh - 500px);
-    box-sizing: border-box;
-    padding-bottom: 20px;
+    /*box-sizing: border-box;*/
+    /*padding-bottom: 20px;*/
 }
 
 .tab-button {
@@ -250,7 +240,6 @@ body.page-loaded {
     font-weight: bold;
     color: #ffffff;
     background-color: rgba(99, 99, 99, 0.3);
-
     cursor: pointer;
     padding: 10px 20px;
     width: 50%;
@@ -297,7 +286,7 @@ body.page-loaded {
     transform: translateY(0);
 }
 
-.token-panel {
+.token-panel, .rewards-panel {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -308,12 +297,12 @@ body.page-loaded {
     border-radius: 10px;
 }
 
-.token-info {
+.token-info, .rewards-info {
     display: flex;
     align-items: center;
 }
 
-.token-logo {
+.token-logo, .rewards-logo {
     width: 40px;
     height: 40px;
     margin-right: 15px;
@@ -322,7 +311,7 @@ body.page-loaded {
     border-radius: 10px;
 }
 
-.token-details {
+.token-details, .rewards-details {
     display: flex;
     flex-direction: column;
 }
@@ -332,14 +321,14 @@ body.page-loaded {
     align-items: center;
 }
 
-.token-symbol {
+.token-symbol, .rewards-symbol {
     font-size: 16px;
     font-weight: bold;
     color: #333;
     margin-right: 10px;
 }
 
-.token-name {
+.token-name, .rewards-name {
     font-size: 12px;
     color: #fff;
     background-color: #888;
@@ -371,37 +360,6 @@ body.page-loaded {
     margin-top: 4px;
 }
 
-.rewards-panel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 15px;
-    margin: 0 10px 10px 10px;
-    border: rgba(51, 51, 51, 0.25) .5px solid;
-    border-radius: 10px;
-}
-
-.rewards-info {
-    display: flex;
-    align-items: center;
-}
-
-.rewards-logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 15px;
-
-    padding: 10px;
-    border: #5191f4 1px solid;
-    border-radius: 10px;
-}
-
-.rewards-details {
-    display: flex;
-    flex-direction: column;
-}
-
 .rewards-symbol {
     font-size: 14px;
     font-weight: bold;
@@ -415,14 +373,6 @@ body.page-loaded {
     justify-content: flex-start;
 }
 
-.rewards-name {
-    font-size: 12px;
-    color: #fff;
-    background-color: #888;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
 .rewards-amount {
     font-size: 16px;
     color: #4caf50;
@@ -433,6 +383,7 @@ body.page-loaded {
     font-size: 12px;
     color: #8e8e8e;
     margin-top: 5px;
+    ;
 }
 
 .rewards-level {
