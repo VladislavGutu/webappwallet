@@ -239,16 +239,16 @@ body.page-loaded {
     padding: 10px 20px;
     width: 50%;
     text-align: center;
-    border-top-left-radius: 10px; /* Закругление верхнего левого угла */
-    border-top-right-radius: 10px; /* Закругление верхнего правого угла */
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Тень сверху */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     z-index: 999;
 }
 
 .tab-button.active {
     color: #5191f4;
     background-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 -4px 3px #5191f4; /* Тень сверху */
+    box-shadow: 0 -4px 3px #5191f4;
 }
 
 .tab-content {

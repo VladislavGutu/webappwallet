@@ -197,7 +197,7 @@ tabButtons.forEach((button) => {
                 withdrawButton.style.display = "none";
 
                 setTimeout(() => {
-                // window.scrollTo(0, -100);
+                window.scrollTo(0, 0);
 
                     currentTabContent.innerHTML = "";
                     toggleTab("rewards-tab");
@@ -245,7 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Копирование адреса кошелька в буфер обмена
 document.addEventListener("DOMContentLoaded", function () {
     const walletAddressElement = document.getElementById("wallet-address");
 
