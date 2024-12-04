@@ -12,10 +12,19 @@ body {
     align-items: center;
     opacity: 0;
     transition: opacity 1s ease-in;
+    overflow: hidden;
 }
 
 body.page-loaded {
     opacity: 1;
+}
+
+.main-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
 }
 
 .wallet-container {
@@ -28,6 +37,8 @@ body.page-loaded {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .wallet-name {
@@ -223,6 +234,14 @@ body.page-loaded {
     margin-bottom: 15px;
 }
 
+.tabs-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Вертикальный скролл для содержимого вкладок */
+    max-height: calc(100vh - 500px); /* Убедитесь, что вкладки не занимают больше, чем свободное пространство */
+    box-sizing: border-box;
+    padding-bottom: 20px; /* Добавление отступа для скроллинга */
+}
+
 .tab-button {
     border: none;
     font-size: 16px;
@@ -252,6 +271,8 @@ body.page-loaded {
     width: 100%;
     transform: translateX(100%);
     transition: transform 0.35s ease;
+     max-height: 100%; /* Чтобы вкладки не выходили за пределы контейнера */
+    overflow-y: auto;
 }
 
 .tab-content.active {

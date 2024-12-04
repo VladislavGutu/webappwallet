@@ -205,6 +205,7 @@ tabButtons.forEach((button) => {
                 }, 175);
             } else if (nextTab === "coins-tab") {
 
+                window.scrollTo(0, 0);
                 currentTabContent.classList.add("right");
 
                 const nextTabContent = document.querySelector(`#${nextTab}`);
