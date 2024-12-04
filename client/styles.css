@@ -227,6 +227,13 @@ body.page-loaded {
     margin-bottom: 15px;
 }
 
+.tabs-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
 .tab-button {
     border: none;
     font-size: 16px;
