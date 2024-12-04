@@ -22,7 +22,7 @@ body.page-loaded {
 .wallet-container {
     max-width: 600px;
     width: 100%;
-min-height: 100vh; /* Растягивает контейнер на всю высоту экрана */
+    /*min-height: 100vh; !* Растягивает контейнер на всю высоту экрана *!*/
 
     margin: 0 auto;
     overflow: visible;
@@ -300,9 +300,16 @@ min-height: 100vh; /* Растягивает контейнер на всю вы
     border-radius: 10px;
 }
 
-.token-info, .rewards-info {
+.token-info {
     display: flex;
     align-items: center;
+}
+
+.rewards-info {
+    display: flex;
+    justify-content: space-between; /* Разделить элементы на две части */
+    align-items: center; /* Вертикальное выравнивание */
+    width: 100%;
 }
 
 .token-logo, .rewards-logo {
@@ -314,9 +321,27 @@ min-height: 100vh; /* Растягивает контейнер на всю вы
     border-radius: 10px;
 }
 
-.token-details, .rewards-details {
+.token-details, .rewards-details{
     display: flex;
     flex-direction: column;
+}
+
+.rewards-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rewards-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rewards-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .token-name-symbol {
@@ -391,15 +416,14 @@ min-height: 100vh; /* Растягивает контейнер на всю вы
 }
 
 .rewards-level {
+    align-self: flex-end;
     font-size: 12px;
     background-color: #d3d3d3;
     color: #333;
     padding: 4px 8px;
     border-radius: 4px;
-    margin-left: auto;
-    align-self: center;
+    margin-top: 10px;
     white-space: nowrap;
-
 }
 
 .popup {
