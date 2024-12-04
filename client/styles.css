@@ -21,6 +21,8 @@ body.page-loaded {
 
 .main-container {
     height: 100%;
+    width: 600px;
+
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;
