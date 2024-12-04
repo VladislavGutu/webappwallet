@@ -30,6 +30,41 @@ const localConfig = {
             name: "Ethereum",
             amount: 200,
             level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
+        },
+        {
+            logo: "https://example.com/eth-logo.png",
+            symbol: "ETH",
+            name: "Ethereum",
+            amount: 200,
+            level: 5
         }
     ]
 };
@@ -53,11 +88,13 @@ function getConfigFromURL() {
 }
 
 function getConfig() {
-    return /*localConfig || */getConfigFromURL();
+    return localConfig || getConfigFromURL();
 }
 
 window.addEventListener("load", () => {
     document.body.classList.add("page-loaded");
+
+    window.scrollTo(0, 0);
 });
 
 function updateWalletInfo(walletAddress, tokens) {

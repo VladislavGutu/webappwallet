@@ -12,6 +12,7 @@ body {
     align-items: center;
     opacity: 0;
     transition: opacity 1s ease-in;
+    overflow: hidden;
 }
 
 body.page-loaded {
@@ -28,6 +29,9 @@ body.page-loaded {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    overflow-y: auto; /* Включение скролла для основного контейнера */
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на мобильных устройствах */
 }
 
 .wallet-name {
@@ -80,8 +84,7 @@ body.page-loaded {
     align-items: center;
 }
 
-.star1, .star2, .star3, .star4, .star5
-{
+.star1, .star2, .star3, .star4, .star5 {
     position: absolute;
     animation: pulse 5s infinite;
     transform-origin: center;
