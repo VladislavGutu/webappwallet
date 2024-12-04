@@ -3,6 +3,7 @@
 }
 
 body {
+    margin: 0;
     background: #f0f0f0;
     min-height: 100vh;
     display: flex;
@@ -21,7 +22,6 @@ body.page-loaded {
 .wallet-container {
     max-width: 600px;
     width: 100%;
-    min-height: 100vh; /* Минимальная высота равна высоте экрана */
 
     margin: 0 auto;
     overflow: visible;
@@ -386,7 +386,7 @@ body.page-loaded {
     color: #8e8e8e;
     margin-top: 5px;
     white-space: nowrap;
-    
+
 }
 
 .rewards-level {
