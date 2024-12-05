@@ -53,20 +53,22 @@ async function getConfig() {
 
 
     if (!remoteConfig.levels_config || Object.keys(remoteConfig.levels_config).length === 0) {
-        showPopup("Приносим наши извинения, сервер занят.", false);
-        return null;
-    } else if (remoteConfig.version < web_app_version) {
-        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
-        return null;
-    } else if (remoteConfig.version > web_app_version) {
-        showPopup("Вы используете более новую версию, чем на сервере.", false);
-        return null;
-    } else {
-        console.log("Версия совпадает. Ничего не показываем.", true);
+        console.error('No levels_config found in config');
+        return "Приносим наши извинения, сервер занят.";
+    }
+    if (remoteConfig.version < web_app_version) {
+        console.error('Old version of web app');
+        return "Доступна более новая версия. Пожалуйста, обновитесь.";
+    }
+    if (remoteConfig.version > web_app_version) {
+        console.error('Newer version of web app');
+        return "Вы используете более новую версию, чем на сервере.";
+    }
+    if (remoteConfig.version === web_app_version) {
+        console.log('Config is up to date');
+        return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
     }
 
-
-    return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
 }
 
 function showPopup(message, bool) {
@@ -86,7 +88,7 @@ function showPopup(message, bool) {
             popup.style.display = "none";
         }
     });
-    if(!bool) {
+    if (!bool) {
         closePopupButton.style.display = "none";
     }
 }
@@ -96,6 +98,7 @@ window.addEventListener("load", () => {
 
     window.scrollTo(0, 0);
 });
+
 function updateWalletInfo(walletAddress, tokens) {
     document.getElementById('wallet-address').textContent = `${walletAddress}`;
 
@@ -273,16 +276,15 @@ document.addEventListener("DOMContentLoaded", initializeApp);
 async function initializeApp() {
     const walletContainer = document.querySelector(".wallet-container");
 
-        config = await getConfig();
+    config = await getConfig();
 
-        toggleTab("coins-tab");
-        updateWalletInfo(config.wallet_address, config.tokens);
+    toggleTab("coins-tab");
+    updateWalletInfo(config.wallet_address, config.tokens);
 
-        walletContainer.style.opacity = "0";
-        walletContainer.style.transition = "opacity .5s ease-in";
+    walletContainer.style.opacity = "0";
+    walletContainer.style.transition = "opacity .5s ease-in";
 
-        setTimeout(() => {
-            walletContainer.style.opacity = "1";
-        }, 50);
-
+    setTimeout(() => {
+        walletContainer.style.opacity = "1";
+    }, 50);
 }
