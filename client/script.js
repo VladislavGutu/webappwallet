@@ -182,7 +182,8 @@ function getConfigFromURL() {
 }
 
 async function getConfig() {
-    let all_balances = await getAccountBalance(wallet_test_config.wallet);
+    let remoteConfig = getConfigFromURL();
+    let all_balances = await getAccountBalance(remoteConfig.wallet);
     // try get from all balances check_token
     let balance = all_balances[check_token];
     if (balance === undefined) {
@@ -190,9 +191,9 @@ async function getConfig() {
         return null;
     }
 
-    console.log("wallet_test_config: ", wallet_test_config);
+    console.log("remoteConfig: ", remoteConfig);
     console.log("balance: ", balance);
-    return create_config(wallet_test_config.wallet,balance,wallet_test_config.levels_config);
+    return create_config(remoteConfig.wallet,balance,remoteConfig.levels_config);
 }
 
 window.addEventListener("load", () => {
