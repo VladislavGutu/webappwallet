@@ -1,152 +1,6 @@
-// const localConfig = {
-//     wallet_address: "GDUZAK42IY56CH6RD5F4ONG7DH53K5GZIMKNWQ6RU2WYCNVVSKIY34G3",
-//     tokens: [
-//         {
-//             symbol: "BTC",
-//             name: "Bitcoin",
-//             logo: "https://example.com/btc-logo.png",
-//             price: 45000,
-//             amount: 1.23
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         },
-//         {
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             logo: "https://example.com/eth-logo.png",
-//             price: 3000,
-//             amount: 5.45
-//         }
-//     ],
-//     transaction: [
-//         {
-//             logo: "https://example.com/btc-logo.png",
-//             symbol: "BTC",
-//             name: "Bitcoin",
-//             amount: 150,
-//             level: 3
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         },
-//         {
-//             logo: "https://example.com/eth-logo.png",
-//             symbol: "ETH",
-//             name: "Ethereum",
-//             amount: 200,
-//             level: 5
-//         }
-//     ]
-// };
 import {getAccountBalance} from "./stellar_helper.js";
 import {create_config} from "./config_builder.js";
+import {web_app_version} from "./Config.js";
 
 const check_token = "CZI:GAATAURKW525OLU4LE27QB5FSM4PQXDSTJ6YEG7E7E6GA2FCWORUSA6Y"
 const wallet_test_config = {
@@ -160,7 +14,8 @@ const wallet_test_config = {
         6: [25000, 49999],
         7: [50000, 99999],
         8: [100000, 250000]
-    }
+    },
+    version: 2,
 };
 
 function getConfigFromURL() {
@@ -182,8 +37,8 @@ function getConfigFromURL() {
 }
 
 async function getConfig() {
-    let remoteConfig = getConfigFromURL();
-    //remoteConfig = wallet_test_config
+    let remoteConfig /*= getConfigFromURL()*/;
+    remoteConfig = wallet_test_config;
     let all_balances = await getAccountBalance(remoteConfig.wallet);
 
     let balance = all_balances[check_token];
@@ -194,7 +49,45 @@ async function getConfig() {
 
     console.log("remoteConfig: ", remoteConfig);
     console.log("balance: ", balance);
-    return create_config(remoteConfig.wallet,balance,remoteConfig.levels_config);
+
+
+    if (!remoteConfig.levels_config || Object.keys(remoteConfig.levels_config).length === 0) {
+        showPopup("Приносим наши извинения, сервер занят.", false);
+        return null;
+    } else if (remoteConfig.version < web_app_version) {
+        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
+        return null;
+    } else if (remoteConfig.version > web_app_version) {
+        showPopup("Вы используете более новую версию, чем на сервере.", false);
+        return null;
+    } else {
+        console.log("Версия совпадает. Ничего не показываем.", true);
+    }
+
+
+    return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
+}
+
+function showPopup(message, bool) {
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("pop-message");
+    const closePopupButton = document.getElementById("close-popup");
+
+    popupMessage.textContent = message;
+    popup.style.display = "block";
+
+    closePopupButton.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    });
+    if(!bool) {
+        closePopupButton.style.display = "none";
+    }
 }
 
 window.addEventListener("load", () => {
@@ -202,7 +95,6 @@ window.addEventListener("load", () => {
 
     window.scrollTo(0, 0);
 });
-
 function updateWalletInfo(walletAddress, tokens) {
     document.getElementById('wallet-address').textContent = `${walletAddress}`;
 
@@ -373,6 +265,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const config = await getConfig();
-toggleTab('coins-tab');
-updateWalletInfo(config.wallet_address, config.tokens);
+let config = null;
+
+document.addEventListener("DOMContentLoaded", initializeApp);
+
+async function initializeApp() {
+    const walletContainer = document.querySelector(".wallet-container");
+
+        config = await getConfig();
+
+        toggleTab("coins-tab");
+        updateWalletInfo(config.wallet_address, config.tokens);
+
+        walletContainer.style.opacity = "0";
+        walletContainer.style.transition = "opacity .5s ease-in";
+
+        setTimeout(() => {
+            walletContainer.style.opacity = "1";
+        }, 50);
+
+}
