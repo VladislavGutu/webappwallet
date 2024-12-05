@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.add("show");
     });
 
-
     closeModalBtn.addEventListener("click", () => {
         modal.classList.remove("show");
     });
