@@ -52,6 +52,9 @@ async function getConfig() {
     } else if (remoteConfig.version > web_app_version) {
         showPopup("Вы используете более новую версию, чем на сервере.", false);
         return null;
+    } else {
+        showPopup("Update button and try again.", false);
+        return null;
     }
 
 }
