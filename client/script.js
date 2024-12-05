@@ -36,6 +36,7 @@ function getConfigFromURL() {
     }
 }
 
+
 async function getConfig() {
     let remoteConfig = getConfigFromURL();
     // remoteConfig = wallet_test_config;
