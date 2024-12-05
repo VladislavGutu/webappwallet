@@ -15,7 +15,7 @@ const wallet_test_config = {
         7: [50000, 99999],
         8: [100000, 250000]
     },
-    version: 1,
+    version: 2,
 };
 
 function getConfigFromURL() {
@@ -38,8 +38,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    let remoteConfig /*= getConfigFromURL()*/;
-    remoteConfig = wallet_test_config;
+    let remoteConfig = getConfigFromURL();
+    // remoteConfig = wallet_test_config;
     let all_balances = await getAccountBalance(remoteConfig.wallet);
 
     let balance = all_balances[check_token];
@@ -56,17 +56,16 @@ async function getConfig() {
         showPopup("Приносим наши извинения, сервер занят.", false);
         return null;
     }
-    if (remoteConfig.version < web_app_version) {
-        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
-        return null;
-    }
-    if (remoteConfig.version > web_app_version) {
-        showPopup("Вы используете более новую версию, чем на сервере.", false);
-        return null;
-    }
+
     if (remoteConfig.version === web_app_version) {
         console.log('Config is up to date');
         return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
+    } else if (remoteConfig.version < web_app_version) {
+        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
+        return null;
+    } else if (remoteConfig.version > web_app_version) {
+        showPopup("Вы используете более новую версию, чем на сервере.", false);
+        return null;
     }
 
 }
