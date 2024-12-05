@@ -25,3 +25,4 @@ export async function getAccountBalance(wallet_address) {
         return { error: "Stellar error" };
     }
 }
+

@@ -38,8 +38,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    let remoteConfig = getConfigFromURL();
-    // remoteConfig = wallet_test_config;
+    let remoteConfig /*= getConfigFromURL()*/;
+    remoteConfig = wallet_test_config;
     let all_balances = await getAccountBalance(remoteConfig.wallet);
 
     let balance = all_balances[check_token];
@@ -268,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Wallet Address copied to clipboard!");
     });
 });
+
 
 let config = null;
 
