@@ -43,6 +43,11 @@ async function getConfig() {
         return null;
     }
 
+    if (!remoteConfig.version){
+        showPopup("Update button and try again.", false);
+        return null;
+    }
+
     if (remoteConfig.version === web_app_version) {
         console.log('Config is up to date');
         return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
