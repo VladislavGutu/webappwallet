@@ -183,8 +183,9 @@ function getConfigFromURL() {
 
 async function getConfig() {
     let remoteConfig = getConfigFromURL();
+    //remoteConfig = wallet_test_config
     let all_balances = await getAccountBalance(remoteConfig.wallet);
-    // try get from all balances check_token
+
     let balance = all_balances[check_token];
     if (balance === undefined) {
         console.error('No balance found for check_token');

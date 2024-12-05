@@ -28,7 +28,7 @@ function calculate_level(balance,levels_config) {
     // levels_config show like this {level:[min,max]}
     const levels = Object.entries(levels_config);
     for (let index = 0; index < levels.length; index++) {
-        let level_range = levels[index][1] - levels[index][0];
+        let level_range = levels[index][1][1] - levels[index][1][0];
         if (balance < level_range || index === levels.length - 1) {
             return index+1;
         }
