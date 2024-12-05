@@ -15,7 +15,7 @@ const wallet_test_config = {
         7: [50000, 99999],
         8: [100000, 250000]
     },
-    version: 2,
+    version: 1,
 };
 
 function getConfigFromURL() {
@@ -53,16 +53,16 @@ async function getConfig() {
 
 
     if (!remoteConfig.levels_config || Object.keys(remoteConfig.levels_config).length === 0) {
-        console.error('No levels_config found in config');
-        return "Приносим наши извинения, сервер занят.";
+        showPopup("Приносим наши извинения, сервер занят.", false);
+        return null;
     }
     if (remoteConfig.version < web_app_version) {
-        console.error('Old version of web app');
-        return "Доступна более новая версия. Пожалуйста, обновитесь.";
+        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
+        return null;
     }
     if (remoteConfig.version > web_app_version) {
-        console.error('Newer version of web app');
-        return "Вы используете более новую версию, чем на сервере.";
+        showPopup("Вы используете более новую версию, чем на сервере.", false);
+        return null;
     }
     if (remoteConfig.version === web_app_version) {
         console.log('Config is up to date');
