@@ -36,7 +36,6 @@ function getConfigFromURL() {
     }
 }
 
-
 async function getConfig() {
     let remoteConfig = getConfigFromURL();
     // remoteConfig = wallet_test_config;
@@ -50,7 +49,6 @@ async function getConfig() {
 
     console.log("remoteConfig: ", remoteConfig);
     console.log("balance: ", balance);
-
 
     if (!remoteConfig.levels_config || Object.keys(remoteConfig.levels_config).length === 0) {
         showPopup("Приносим наши извинения, сервер занят.", false);

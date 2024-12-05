@@ -105,4 +105,3 @@ function create_transaction_helper(level) {
 }
 
 
-
