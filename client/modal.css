@@ -20,6 +20,7 @@
     pointer-events: all;
 }
 
+
 .modal-content {
     background: linear-gradient(to bottom, rgba(133, 246, 142, 1), rgba(255, 255, 255, 0.9));
     padding: 20px;
