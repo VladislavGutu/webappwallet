@@ -1,13 +1,16 @@
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
+    "BTC": "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
 };
 
 const token_name = {
     "USDC": "USD Coin",
+    "BTC": "Bitcoin",
 };
 
 const token_price = {
-    "USDC": 1
+    "USDC": 1,
+    "BTC": 100908
 };
 
 const token_bonus = {
