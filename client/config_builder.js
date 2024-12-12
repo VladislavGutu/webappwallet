@@ -1,3 +1,5 @@
+import {getActiveWallet} from "../Core/database.js";
+
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
     "BTC": "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
@@ -27,38 +29,26 @@ const token_bonus = {
 };
 
 
-function calculate_level(balance,levels_config) {
-    // levels_config show like this {level:[min,max]}
-    const levels = Object.entries(levels_config);
-    for (let index = 0; index < levels.length; index++) {
-        let level_range = levels[index][1][1] - levels[index][1][0];
-        if (balance < level_range || index === levels.length - 1) {
-            return index+1;
-        }
-        balance -= level_range;
-    }
-}
-
-
-export function create_config(wallet_address, balance, levels_config) {
+export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance,levels_config);
     console.log("level: ", level);
     level = level > 8 ? 8 : level;
     const tokens = [create_token_helper("USDC", level)];
+
+    const wallet_data = await getActiveWallet(wallet_address);
+    const btc_balance = Object.values(wallet_data.history).reduce((acc, val) => acc + val, 0);
+
+    tokens.push(create_custom_token_helper("BTC", btc_balance));
     const transaction = create_transaction_helper(level);
 
     const config = {
         "wallet_address": wallet_address,
         "tokens": tokens,
-        "transaction": transaction
+        "transaction": transaction,
     };
     console.log("config: ", config);
     return config;
 }
-
-
-
-
 
 function create_transaction_item(symbol, level) {
     let amount = 0;
@@ -93,6 +83,16 @@ function create_token_helper(symbol, level) {
     };
 }
 
+function create_custom_token_helper(symbol, amount) {
+    return {
+        "name": token_name[symbol] || "None",
+        "symbol": symbol,
+        "amount": amount,
+        "price": token_price[symbol] || -1,
+        "logo": logo[symbol] || "None"
+    };
+}
+
 function create_transaction_helper(level) {
     const transaction = [];
     // Add history, for example, if it's the first day +10000, if it's the second day +10000 (20000), etc.
@@ -107,5 +107,16 @@ function create_transaction_helper(level) {
     return transaction;
 }
 
+function calculate_level(balance,levels_config) {
+    // levels_config show like this {level:[min,max]}
+    const levels = Object.entries(levels_config);
+    for (let index = 0; index < levels.length; index++) {
+        let level_range = levels[index][1][1] - levels[index][1][0];
+        if (balance < level_range || index === levels.length - 1) {
+            return index+1;
+        }
+        balance -= level_range;
+    }
+}
 
 
