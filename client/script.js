@@ -10,6 +10,8 @@ function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedConfig = urlParams.get('config');
 
+    console.log("encodedConfig: ", encodedConfig);
+
     if (encodedConfig) {
         try {
             const decodedConfig = decodeURIComponent(encodedConfig);
@@ -26,13 +28,13 @@ function getConfigFromURL() {
 
 async function getConfig() {
     let remoteConfig = getConfigFromURL();
-     remoteConfig = wallet_test_config;
+    //remoteConfig = wallet_test_config;
 
     let all_balances = await getAccountBalance(remoteConfig.wallet);
 
     let balance = all_balances[check_token];
     if (balance === undefined) {
-        console.error('No balance found for check_token');
+        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
         return null;
     }
 
