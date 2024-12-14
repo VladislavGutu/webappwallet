@@ -34,7 +34,8 @@ async function getConfig() {
 
     let balance = all_balances[check_token];
     if (balance === undefined) {
-        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
+        console.error('No balance found for check_token');
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     }
 
@@ -42,7 +43,7 @@ async function getConfig() {
     console.log("balance: ", balance);
 
     if (!remoteConfig.levels_config || Object.keys(remoteConfig.levels_config).length === 0) {
-        showPopup("Приносим наши извинения, сервер занят.", false);
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     }
 
@@ -53,15 +54,15 @@ async function getConfig() {
 
     if (remoteConfig.version === web_app_version) {
         console.log('Config is up to date');
-        return await create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
+        return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
     } else if (remoteConfig.version < web_app_version) {
-        showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     } else if (remoteConfig.version > web_app_version) {
-        showPopup("Вы используете более новую версию, чем на сервере.", false);
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     } else {
-        showPopup("Update button and try again.", false);
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     }
 
