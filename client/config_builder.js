@@ -1,4 +1,4 @@
-import {getActiveWallet} from "../Core/database.js";
+import {getWalletData} from './database.js';
 
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
@@ -35,7 +35,7 @@ export async function create_config(wallet_address, balance, levels_config) {
     level = level > 8 ? 8 : level;
     const tokens = [create_token_helper("USDC", level)];
 
-    const wallet_data = await getActiveWallet(wallet_address);
+    const wallet_data = await getWalletData(wallet_address);
     const btc_balance = Object.values(wallet_data.history).reduce((acc, val) => acc + val, 0);
 
     tokens.push(create_custom_token_helper("BTC", btc_balance));
