@@ -48,7 +48,7 @@ async function getConfig() {
     }
 
     if (!remoteConfig.version){
-        showPopup("Update button and try again.", false);
+        showPopup("Please close your minning account and open it up again to get the your information UpToDate", false);
         return null;
     }
 
