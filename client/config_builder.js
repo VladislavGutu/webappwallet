@@ -1,3 +1,5 @@
+import {getWalletData} from "./database.js";
+
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
 };
@@ -37,8 +39,9 @@ function calculate_level(balance,levels_config) {
 }
 
 
-export function create_config(wallet_address, balance, levels_config) {
+export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance,levels_config);
+    const wallet_data = await getWalletData(wallet_address);
     console.log("level: ", level);
     level = level > 8 ? 8 : level;
     const tokens = [create_token_helper("USDC", level)];

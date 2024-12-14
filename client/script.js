@@ -50,7 +50,7 @@ async function getConfig() {
 
     if (remoteConfig.version === web_app_version) {
         console.log('Config is up to date');
-        return create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
+        return await create_config(remoteConfig.wallet, balance, remoteConfig.levels_config, remoteConfig.version);
     } else if (remoteConfig.version < web_app_version) {
         showPopup("Доступна более новая версия. Пожалуйста, обновитесь.", false);
         return null;
