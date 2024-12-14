@@ -17,11 +17,9 @@ export async function getAccountBalance(wallet_address) {
                 balances[`${balance.asset_code}:${balance.asset_issuer}`] = balance.balance;
             }
         });
-        console.log("Баланс аккаунта:", balances);
         return balances;
 
     } catch (error) {
-        console.error({ error: "Stellar error" });
         return { error: "Stellar error" };
     }
 }

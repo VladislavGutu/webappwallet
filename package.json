@@ -13,7 +13,10 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@stellar/stellar-sdk": "^13.0.0"
+    "@stellar/stellar-sdk": "^13.0.0",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "knex": "^3.1.0"
   },
   "devDependencies": {
     "vite": "^6.0.2"
