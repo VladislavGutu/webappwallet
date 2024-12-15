@@ -3,22 +3,22 @@ import {getWalletData} from './database.js';
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
     "BTC": "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-    "ABC": "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-    "DEF": "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
+    "XLM": "https://cryptologos.cc/logos/stellar-xlm-logo.png",
+    "XRP": "https://cryptologos.cc/logos/xrp-xrp-logo.png",
 };
 
 const token_name = {
     "USDC": "USD Coin",
     "BTC": "Bitcoin",
-    "ABC": "abc",
-    "DEF": "def",
+    "XLM": "abc",
+    "XRP": "def",
 };
 
 const token_price = {
     "USDC": 1,
     "BTC": 100908,
-    "ABC": 100908,
-    "DEF": 100908
+    "XLM": 0.42,
+    "XRP": 2.40
 };
 
 const token_bonus = {
@@ -33,26 +33,30 @@ const token_bonus = {
         8: 1000000
     },
 
-    "ABC": {  // level: amount
+    "XLM": {  // level: amount
         1: 10000,
         2: 20000,
-        3: 30000,
-        4: 50000,
-        5: 100000,
-        6: 250000,
-        7: 500000,
-        8: 1000000
+        3: 40000,
+        4: 80000,
+        5: 160000,
+        6: 320000,
+        7: 640000,
+        8: 1280000,
+        9: 2560000,
+        10: 5120000
     },
 
-    "DEF": {  // level: amount
+    "XRP": {  // level: amount
         1: 10000,
         2: 20000,
-        3: 30000,
-        4: 50000,
-        5: 100000,
-        6: 250000,
-        7: 500000,
-        8: 1000000
+        3: 40000,
+        4: 80000,
+        5: 160000,
+        6: 320000,
+        7: 640000,
+        8: 1280000,
+        9: 2560000,
+        10: 5120000
     }
 };
 
