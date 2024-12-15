@@ -249,22 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const walletAddressElement = document.getElementById("wallet-address");
 
-    walletAddressElement.addEventListener("click", function () {
-        const walletAddress = walletAddressElement.textContent;
-
-        const textarea = document.createElement("textarea");
-        textarea.value = walletAddress;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-
-        alert("Wallet Address copied to clipboard!");
-    });
-});
 
 
 let config = null;
