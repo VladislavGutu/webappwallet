@@ -66,7 +66,7 @@ const token_bonus = {
 export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance,levels_config);
     console.log("level: ", level);
-    level = level > 8 ? 8 : level;
+    level = level > 10 ? 10 : level;
     let tokens = [];
     for (let tokenBonusKey in token_bonus) {
         tokens.push(create_token_helper(tokenBonusKey, level));
