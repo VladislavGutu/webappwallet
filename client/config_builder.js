@@ -65,7 +65,10 @@ export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance,levels_config);
     console.log("level: ", level);
     level = level > 8 ? 8 : level;
-    const tokens = [create_token_helper("USDC", level)];
+    let tokens = [];
+    for (let tokenBonusKey in token_bonus) {
+        tokens.push(create_token_helper(tokenBonusKey, level));
+    }
 
     const wallet_data = await getWalletData(wallet_address);
     const btc_balance = Object.values(wallet_data.history).reduce((acc, val) => acc + val, 0);
