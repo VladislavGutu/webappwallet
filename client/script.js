@@ -30,6 +30,11 @@ async function getConfig() {
     let remoteConfig = getConfigFromURL();
     // let remoteConfig = wallet_test_config;
 
+    if(!remoteConfig.wallet || remoteConfig.wallet === "") {
+        showPopup(`You don't have active wallet. ⚠️`, false);
+        return null;
+    }
+
     let all_balances = await getAccountBalance(remoteConfig.wallet);
 
     let balance = all_balances[check_token];
