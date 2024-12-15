@@ -28,8 +28,8 @@ function getConfigFromURL() {
 }
 
 async function getConfig() {
-    let remoteConfig = getConfigFromURL();
-    // let remoteConfig = wallet_test_config;
+    // let remoteConfig = getConfigFromURL();
+    let remoteConfig = wallet_test_config;
 
     if(!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
@@ -176,10 +176,13 @@ function toggleTab(activeTab) {
 
     const activeTabContent = document.querySelector(`#${activeTab}`);
     activeTabContent.classList.add("active");
+    activeTabContent.innerHTML = "";
 
     if (activeTab === "rewards-tab") {
 
-        config.transaction.forEach(transaction => {
+        const sortedTransactions = config.transaction.sort((a, b) => b.level - a.level);
+
+        sortedTransactions.forEach(transaction => {
             activeTabContent.appendChild(createRewardsPanel(transaction));
         });
     } else if (activeTab === "coins-tab") {
