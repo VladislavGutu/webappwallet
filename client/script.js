@@ -125,7 +125,7 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${token.price.toFixed(2)}</span>
+            <span class="token-price">$${token.price.toFixed(7)}</span>
         </div>
     </div>
     <div class="token-right">
