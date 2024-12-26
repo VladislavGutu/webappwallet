@@ -29,7 +29,7 @@ function getConfigFromURL() {
 }
 
 async function getConfig() {
-    let remoteConfig = get_config(getConfigFromURL());
+    let remoteConfig = await get_config(getConfigFromURL());
     // let remoteConfig = wallet_test_config;
 
     if(!remoteConfig.wallet || remoteConfig.wallet === "") {
