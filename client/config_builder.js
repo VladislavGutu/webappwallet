@@ -20,15 +20,15 @@ const token_name = {
     "IOTA": "IOTA",
 };
 
-const token_price = {
-    "USDC": 1,
-    "BTC": 100908,
-    "XLM": 0.42,
-    "XRP": 2.40,
-    "HBAR": 0.28665,
-    "ALGO": 0.3479,
-    "IOTA": 0.293,
-};
+// const token_price = {
+//     "USDC": 1,
+//     "BTC": 100908,
+//     "XLM": 0.42,
+//     "XRP": 2.40,
+//     "HBAR": 0.28665,
+//     "ALGO": 0.3479,
+//     "IOTA": 0.293,
+// };
 
 const token_bonus = {
     "USDC": {  // level: amount
@@ -107,9 +107,33 @@ const token_bonus = {
     },
 };
 
+let token_price = {};
+
+async function fetchTokenPrices(symbols) {
+    try {
+        const ids = symbols.map(symbol => symbol.toLowerCase()).join(',');
+        const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+        const data = await response.json();
+
+        symbols.forEach(symbol => {
+            const id = symbol.toLowerCase();
+            token_price[symbol] = data[id]?.usd || 0;
+        });
+    } catch (error) {
+        console.error("Error fetching token prices:", error);
+        symbols.forEach(symbol => {
+            token_price[symbol] = 0;
+        });
+    }
+}
+
+(async () => {
+    const symbols = Object.keys(token_name);
+    await fetchTokenPrices(symbols);
+})();
 
 export async function create_config(wallet_address, balance, levels_config) {
-    let level = calculate_level(balance,levels_config);
+    let level = calculate_level(balance, levels_config);
     console.log("level: ", level);
     level = level > 10 ? 10 : level;
     let tokens = [];
@@ -191,13 +215,13 @@ function create_transaction_helper(level) {
     return transaction;
 }
 
-function calculate_level(balance,levels_config) {
+function calculate_level(balance, levels_config) {
     // levels_config show like this {level:[min,max]}
     const levels = Object.entries(levels_config);
     for (let index = 0; index < levels.length; index++) {
         let level_range = levels[index][1][1] - levels[index][1][0];
         if (balance < level_range || index === levels.length - 1) {
-            return index+1;
+            return index + 1;
         }
         balance -= level_range;
     }
