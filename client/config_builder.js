@@ -25,9 +25,9 @@ const token_price = {
     "BTC": 100908,
     "XLM": 0.42,
     "XRP": 2.40,
-    "HBAR": 0.42,
-    "ALGO": 0.42,
-    "IOTA": 0.42,
+    "HBAR": 0.28665,
+    "ALGO": 0.3479,
+    "IOTA": 0.293,
 };
 
 const token_bonus = {
