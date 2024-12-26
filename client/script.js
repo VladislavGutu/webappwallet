@@ -12,6 +12,7 @@ function getUserIdFromURL() {
     return urlParams.get("user_id");
 }
 
+
 async function getConfig() {
     let remoteConfig = get_config(getUserIdFromURL());
     // let remoteConfig = wallet_test_config;
@@ -114,8 +115,8 @@ function createTokenPanel(token) {
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${token.amount.toFixed(2)}</span>
-        <span class="token-total">~$${(token.price * token.amount).toFixed(2)}</span>
+        <span class="token-quantity">${token.amount.toFixed(4)}</span>
+        <span class="token-total">~$${(token.price * token.amount).toFixed(4)}</span>
     </div>`;
 
     return tokenPanel;
