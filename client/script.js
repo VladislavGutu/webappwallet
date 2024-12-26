@@ -12,7 +12,6 @@ function getUserIdFromURL() {
     return urlParams.get("user_id");
 }
 
-
 async function getConfig() {
     let remoteConfig = get_config(getUserIdFromURL());
     // let remoteConfig = wallet_test_config;
