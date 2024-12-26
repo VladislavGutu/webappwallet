@@ -5,32 +5,13 @@ import {get_config} from "../datacontoller.js";
 
 const check_token = "CZI:GAATAURKW525OLU4LE27QB5FSM4PQXDSTJ6YEG7E7E6GA2FCWORUSA6Y"
 
-// const wallet_test_config = {'wallet': 'GB6Z2DZTMXHB7M6ETEXKGDRJCAUTDSIL6AZAHV6K4HEO6ZVH5H5TTVER', 'levels_config': {1: [0, 99], 2: [100, 999], 3: [1000, 4999], 4: [5000, 9999], 5: [10000, 24999], 6: [25000, 49999], 7: [50000, 99999], 8: [100000, 250000]}, 'version': 2}
+const wallet_test_config = {'wallet': 'GB6Z2DZTMXHB7M6ETEXKGDRJCAUTDSIL6AZAHV6K4HEO6ZVH5H5TTVER', 'levels_config': {1: [0, 99], 2: [100, 999], 3: [1000, 4999], 4: [5000, 9999], 5: [10000, 24999], 6: [25000, 49999], 7: [50000, 99999], 8: [100000, 250000]}, 'version': 2}
 
 function getUserIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get("user_id");
 }
-function getConfigFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const encodedConfig = urlParams.get('config');
 
-    console.log("encodedConfig: ", encodedConfig);
-
-    if (encodedConfig) {
-        try {
-            const decodedConfig = decodeURIComponent(encodedConfig);
-            return JSON.parse(decodedConfig);
-        } catch (error) {
-            console.error('Error decoding config:', error);
-            return null;
-        }
-    } else {
-        console.error('No config parameter found in URL');
-        showPopup("Please close your wallet app and open it up again to get the your information UpToDate. 🛠", false);
-        return null;
-    }
-}
 
 async function getConfig() {
     let remoteConfig = get_config(getUserIdFromURL());
