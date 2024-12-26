@@ -42,7 +42,7 @@ async function getConfig() {
     let balance = all_balances[check_token];
     if (balance === undefined) {
         console.error('No balance found for check_token');
-        showPopup("Please close your wallet app and open it up again to get the your information UpToDate. 🛠", false);
+        showPopup("Please all trusline your wallet to the CZI token. 🛠", false);
         return null;
     }
 
