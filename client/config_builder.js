@@ -128,9 +128,12 @@ async function fetchTokenPrices() {
     }
 }
 
-(async () => {
-    await fetchTokenPrices();
-})();
+function startPriceFetchLoop() {
+    fetchTokenPrices();
+    setInterval(fetchTokenPrices, 2 * 60 * 1000);
+}
+
+startPriceFetchLoop();
 
 export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance, levels_config);
