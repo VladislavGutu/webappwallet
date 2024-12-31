@@ -44,8 +44,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    let remoteConfig = await get_config(getConfigFromURL());
-    // let remoteConfig = wallet_test_config;
+    // let remoteConfig = await get_config(getConfigFromURL());
+    let remoteConfig = wallet_test_config;
 
     if(!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
@@ -144,6 +144,8 @@ export function updateTokenPriceAndArrow(token) {
             </span>
         `;
     }
+
+    showPopup("Please close your wallet app and open it up again to get the your information UpToDate. 🛠", false);
 }
 
 function getArrowClass(arrow) {
