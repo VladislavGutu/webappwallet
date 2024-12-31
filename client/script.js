@@ -162,7 +162,6 @@ function createTokenPanel(token) {
 
     const { previous_price } = getTokenData();
 
-    tokenPanel.classList.add("token-panel");
 
     tokenPanel.innerHTML = `
     <div class="token-info">
@@ -172,14 +171,12 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${round(token.price,2)}
-            <span class="price-arrow" id="arrow-${token.symbol}" data-symbol="${token.symbol}"> ${''} </span>
-            </span>
+            <span class="token-price">$${round(token.price,2)}</span>
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${round(token.amount, 7)}</span>
-        <span class="token-total">~$${round((token.price * token.amount), 2)}</span>
+        <span class="token-quantity">${round(token.amount,7)}</span>
+        <span class="token-total">~$${round((token.price * token.amount),2)}</span>
     </div>`;
 
     return tokenPanel;
