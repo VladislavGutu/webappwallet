@@ -129,39 +129,9 @@ function updateWalletInfo(walletAddress, tokens) {
     document.getElementById("balance").textContent = `${round(totalBalance, 2)} USD`;
 }
 
-export function updateTokenPriceAndArrow(token) {
-    const { token_price, previous_price } = getTokenData();
-
-    const priceElement = document.getElementById(`price-${token.symbol}`);
-    const arrowElement = document.getElementById(`arrow-${token.symbol}`);
-
-    if (priceElement && arrowElement) {
-        priceElement.innerHTML = `$${round(token_price[token.symbol], 2)}`;
-
-        let arrowClass = '';
-        let arrow = '';
-
-        if (previous_price[token.symbol] === '▲') {
-            arrowClass = 'green';
-            arrow = '▲';
-        } else if (previous_price[token.symbol] === '▼') {
-            arrowClass = 'red';
-            arrow = '▼';
-        } else {
-            arrowClass = 'black';
-            arrow = '→';
-        }
-
-        arrowElement.textContent = arrow;
-        arrowElement.className = `price-arrow ${arrowClass}`;
-    }
-}
-
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
-
-    const { previous_price } = getTokenData();
-
+    tokenPanel.classList.add("token-panel");
 
     tokenPanel.innerHTML = `
     <div class="token-info">
