@@ -44,8 +44,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    let remoteConfig = await get_config(getConfigFromURL());
-    // let remoteConfig = wallet_test_config;
+    // let remoteConfig = await get_config(getConfigFromURL());
+    let remoteConfig = wallet_test_config;
 
     if(!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
@@ -129,6 +129,28 @@ function updateWalletInfo(walletAddress, tokens) {
     document.getElementById("balance").textContent = `${round(totalBalance, 2)} USD`;
 }
 
+export function updateTokenPriceAndArrow(token) {
+    const { token_price, previous_price } = getTokenData();
+
+    const priceElement = document.getElementById(`price-${token.symbol}`);
+    const arrowElement = document.getElementById(`arrow-${token.symbol}`);
+
+    if (priceElement && arrowElement) {
+        priceElement.innerHTML = `
+            $${round(token_price[token.symbol], 2)}
+            <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}">
+                ${previous_price[token.symbol] || ''}
+            </span>
+        `;
+    }
+}
+
+function getArrowClass(arrow) {
+    if (arrow === '▲') return 'green';
+    if (arrow === '▼') return 'red';
+    return 'black';
+}
+
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
     tokenPanel.classList.add("token-panel");
@@ -141,7 +163,11 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${round(token.price,2)}</span>
+            <span class="token-price">$${round(token.price,2)}
+                <span class="price-arrow" id="arrow-${token.symbol}">
+                    →
+                </span>
+            </span>
         </div>
     </div>
     <div class="token-right">
