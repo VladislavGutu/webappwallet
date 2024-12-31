@@ -172,8 +172,8 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${round(token.price, 2)}
-                <span class="price-arrow" id="arrow-${token.symbol}" data-symbol="${token.symbol}">
+            <span class="token-price">$${round(token.price,2)}
+            <span class="price-arrow" id="arrow-${token.symbol}" data-symbol="${token.symbol}">
                     ${''}
                 </span>
             </span>
