@@ -44,8 +44,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    // let remoteConfig = await get_config(getConfigFromURL());
-    let remoteConfig = wallet_test_config;
+    let remoteConfig = await get_config(getConfigFromURL());
+    // let remoteConfig = wallet_test_config;
 
     if(!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
