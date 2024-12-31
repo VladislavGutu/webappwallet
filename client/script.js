@@ -18,7 +18,7 @@ const wallet_test_config = {'wallet': 'GBQCR3L7H2QBCJNEI3CLBRCGQFSTGPEPRW3U2NPQR
         7: [50000, 99999],
         8: [100000, 250000]
     },
-    'version': 2
+    'version': 3
 }
 
 function getConfigFromURL() {
@@ -137,9 +137,10 @@ export function updateTokenPriceAndArrow(token) {
 
     if (priceElement && arrowElement) {
         priceElement.innerHTML = `
-            $${round(token_price[token.symbol], 2)}
-            <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}">
+            <span class="token-price">$${round(token_price[token.symbol], 2)}
+                <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}">
                 ${previous_price[token.symbol] || ''}
+                </span>
             </span>
         `;
     }
