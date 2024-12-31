@@ -128,7 +128,7 @@ async function fetchTokenPrices() {
             } else if (newPrice < oldPrice) {
                 previous_price[symbol] = '▼';
             } else {
-                previous_price[symbol] = '→';
+                previous_price[symbol] = '';
             }
 
             updateTokenPriceAndArrow({ symbol });
