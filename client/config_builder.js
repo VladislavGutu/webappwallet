@@ -143,6 +143,7 @@ function startPriceFetchLoop() {
     setInterval(fetchTokenPrices, 2000);
 }
 
+
 startPriceFetchLoop();
 
 export function getTokenData() {
