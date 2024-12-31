@@ -108,8 +108,8 @@ const tokensForAPI = {
     "IOTA": "iota",
 };
 
-let token_price = {};
-let previous_price = {};
+export let token_price = {};
+export let previous_price = {};
 
 async function fetchTokenPrices() {
     try {
@@ -123,20 +123,33 @@ async function fetchTokenPrices() {
 
             token_price[symbol] = newPrice;
 
+            let arrow;
             if (newPrice > oldPrice) {
-                previous_price[symbol] = '▲';
+                arrow = '▲';
             } else if (newPrice < oldPrice) {
-                previous_price[symbol] = '▼';
+                arrow = '▼';
             } else {
-                previous_price[symbol] = '';
+                arrow = '⧫';
             }
 
-            updateTokenPriceAndArrow({ symbol });
+            previous_price[symbol] = arrow;
+
+            const percentageChange = oldPrice !== 0 ? ((newPrice - oldPrice) / oldPrice) * 100 : 0;
+
+            updateTokenPriceAndArrow({
+                symbol,
+                price: newPrice,
+                arrow,
+                percentageChange,
+            });
+
+            console.log(`Price for ${symbol} updated: $${newPrice}, Change: ${arrow} ${percentageChange.toFixed(2)}%`);
         }
     } catch (error) {
         console.error("Error fetching token prices:", error);
     }
 }
+
 
 function startPriceFetchLoop() {
     fetchTokenPrices();
@@ -146,7 +159,7 @@ function startPriceFetchLoop() {
 startPriceFetchLoop();
 
 export function getTokenData() {
-    return { token_price, previous_price };
+    return {token_price, previous_price};
 }
 
 export async function create_config(wallet_address, balance, levels_config) {

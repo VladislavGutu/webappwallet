@@ -1,5 +1,5 @@
 import {getAccountBalance} from "./stellar_helper.js";
-import {create_config} from "./config_builder.js";
+import {create_config, previous_price, token_price} from "./config_builder.js";
 import {getTokenData} from "./config_builder.js";
 import {web_app_version} from "./Config.js";
 import {get_config} from "../datacontoller.js";
@@ -7,7 +7,8 @@ import {get_config} from "../datacontoller.js";
 
 const check_token = "CZI:GAATAURKW525OLU4LE27QB5FSM4PQXDSTJ6YEG7E7E6GA2FCWORUSA6Y"
 
-const wallet_test_config = {'wallet': 'GBQCR3L7H2QBCJNEI3CLBRCGQFSTGPEPRW3U2NPQRUJ66ZVQ7SECSUHQ',
+const wallet_test_config = {
+    'wallet': 'GBQCR3L7H2QBCJNEI3CLBRCGQFSTGPEPRW3U2NPQRUJ66ZVQ7SECSUHQ',
     'levels_config': {
         1: [0, 99],
         2: [100, 999],
@@ -44,10 +45,10 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    // let remoteConfig = await get_config(getConfigFromURL());
-    let remoteConfig = wallet_test_config;
+    let remoteConfig = await get_config(getConfigFromURL());
+    // let remoteConfig = wallet_test_config;
 
-    if(!remoteConfig.wallet || remoteConfig.wallet === "") {
+    if (!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
         return null;
     }
@@ -69,7 +70,7 @@ async function getConfig() {
         return null;
     }
 
-    if (!remoteConfig.version){
+    if (!remoteConfig.version) {
         showPopup("Please close your wallet app and open it up again to get the your information UpToDate. 🛠", false);
         return null;
     }
@@ -129,22 +130,28 @@ function updateWalletInfo(walletAddress, tokens) {
     document.getElementById("balance").textContent = `${round(totalBalance, 2)} USD`;
 }
 
-export function updateTokenPriceAndArrow(token) {
-    const { token_price, previous_price } = getTokenData();
+export function updateTokenPriceAndArrow({ symbol, price, arrow, percentageChange }) {
+    const coinsTab = document.getElementById("coins-tab");
+    if (!coinsTab) {
+        console.error("Coins tab not found in DOM.");
+        return;
+    }
 
-    const priceElement = document.getElementById(`price-${token.symbol}`);
-    const arrowElement = document.getElementById(`arrow-${token.symbol}`);
+    if (coinsTab.classList.contains("active")) {
+        coinsTab.innerHTML = "";
 
-    if (priceElement && arrowElement) {
-        priceElement.innerHTML = `
-            <span class="token-price">$${round(token_price[token.symbol], 2)}
-                <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}">
-                ${previous_price[token.symbol] || ''}
-                </span>
-            </span>
-        `;
+        config.tokens.forEach(token => {
+            token.price = token_price[token.symbol];
+            token.arrow = previous_price[token.symbol];
+            token.percentageChange = ((token_price[token.symbol] - (token_price[token.symbol] / (1 + percentageChange / 100))) * 100).toFixed(5);
+
+            const tokenPanel = createTokenPanel(token);
+            coinsTab.appendChild(tokenPanel);
+        });
     }
 }
+
+
 
 function getArrowClass(arrow) {
     if (arrow === '▲') return 'green';
@@ -155,6 +162,7 @@ function getArrowClass(arrow) {
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
     tokenPanel.classList.add("token-panel");
+    tokenPanel.id = `panel-${token.symbol}`;
 
     tokenPanel.innerHTML = `
     <div class="token-info">
@@ -164,14 +172,17 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${round(token.price,2)}
-                <span class="price-arrow" id="arrow-${token.symbol}"></span>
+            <span class="token-price">
+                $${round(token.price, 5)}
+                <span class="price-arrow ${getArrowClass(token.arrow)}">
+                    ${token.arrow || '⧫'} ${token.percentageChange ? `${round(token.percentageChange, 2)}%` : '0.00%'}
+                </span>
             </span>
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${round(token.amount,7)}</span>
-        <span class="token-total">~$${round((token.price * token.amount),2)}</span>
+        <span class="token-quantity">${round(token.amount, 7)}</span>
+        <span class="token-total">~$${round((token.price * token.amount), 2)}</span>
     </div>`;
 
     return tokenPanel;
