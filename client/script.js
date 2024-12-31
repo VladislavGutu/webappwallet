@@ -132,15 +132,28 @@ function updateWalletInfo(walletAddress, tokens) {
 export function updateTokenPriceAndArrow(token) {
     const { token_price, previous_price } = getTokenData();
 
-
     const priceElement = document.getElementById(`price-${token.symbol}`);
     const arrowElement = document.getElementById(`arrow-${token.symbol}`);
 
     if (priceElement && arrowElement) {
-
         priceElement.innerHTML = `$${round(token_price[token.symbol], 2)}`;
 
-        arrowElement.textContent = previous_price[token.symbol] || '';
+        let arrowClass = '';
+        let arrow = '';
+
+        if (previous_price[token.symbol] === '▲') {
+            arrowClass = 'green';
+            arrow = '▲';
+        } else if (previous_price[token.symbol] === '▼') {
+            arrowClass = 'red';
+            arrow = '▼';
+        } else {
+            arrowClass = 'black';
+            arrow = '→';
+        }
+
+        arrowElement.textContent = arrow;
+        arrowElement.className = `price-arrow ${arrowClass}`;
     }
 }
 
@@ -159,9 +172,10 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">$${round(token.price,2)}</span>
-            <span class="price-arrow" id="arrow-${token.symbol}">
-                ${previous_price[token.symbol] || ''}
+            <span class="token-price">$${round(token.price, 2)}
+                <span class="price-arrow" id="arrow-${token.symbol}" data-symbol="${token.symbol}">
+                    ${''}
+                </span>
             </span>
         </div>
     </div>

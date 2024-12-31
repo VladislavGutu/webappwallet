@@ -518,3 +518,14 @@ body {
     background-color: #396fc9;
 }
 
+.price-arrow.green {
+    color: green;
+}
+
+.price-arrow.red {
+    color: red;
+}
+
+.price-arrow.black {
+    color: black;
+}
