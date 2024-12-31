@@ -144,8 +144,6 @@ export function updateTokenPriceAndArrow(token) {
             </span>
         `;
     }
-
-    showPopup("Please close your wallet app and open it up again to get the your information UpToDate. 🛠", false);
 }
 
 function getArrowClass(arrow) {
