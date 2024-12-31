@@ -1,11 +1,25 @@
 import {getAccountBalance} from "./stellar_helper.js";
 import {create_config} from "./config_builder.js";
+import {getTokenData} from "./config_builder.js";
 import {web_app_version} from "./Config.js";
 import {get_config} from "../datacontoller.js";
 
+
 const check_token = "CZI:GAATAURKW525OLU4LE27QB5FSM4PQXDSTJ6YEG7E7E6GA2FCWORUSA6Y"
 
-// const wallet_test_config = {'wallet': 'GB6Z2DZTMXHB7M6ETEXKGDRJCAUTDSIL6AZAHV6K4HEO6ZVH5H5TTVER', 'levels_config': {1: [0, 99], 2: [100, 999], 3: [1000, 4999], 4: [5000, 9999], 5: [10000, 24999], 6: [25000, 49999], 7: [50000, 99999], 8: [100000, 250000]}, 'version': 2}
+const wallet_test_config = {'wallet': 'GBQCR3L7H2QBCJNEI3CLBRCGQFSTGPEPRW3U2NPQRUJ66ZVQ7SECSUHQ',
+    'levels_config': {
+        1: [0, 99],
+        2: [100, 999],
+        3: [1000, 4999],
+        4: [5000, 9999],
+        5: [10000, 24999],
+        6: [25000, 49999],
+        7: [50000, 99999],
+        8: [100000, 250000]
+    },
+    'version': 2
+}
 
 function getConfigFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -112,11 +126,29 @@ function updateWalletInfo(walletAddress, tokens) {
         totalBalance += token.price * token.amount;
     });
 
-    document.getElementById("balance").textContent = `${round(totalBalance,2)} USD`;
+    document.getElementById("balance").textContent = `${round(totalBalance, 2)} USD`;
+}
+
+export function updateTokenPriceAndArrow(token) {
+    const { token_price, previous_price } = getTokenData();
+
+
+    const priceElement = document.getElementById(`price-${token.symbol}`);
+    const arrowElement = document.getElementById(`arrow-${token.symbol}`);
+
+    if (priceElement && arrowElement) {
+
+        priceElement.innerHTML = `$${round(token_price[token.symbol], 2)}`;
+
+        arrowElement.textContent = previous_price[token.symbol] || '';
+    }
 }
 
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
+
+    const { previous_price } = getTokenData();
+
     tokenPanel.classList.add("token-panel");
 
     tokenPanel.innerHTML = `
@@ -128,17 +160,20 @@ function createTokenPanel(token) {
                 <span class="token-name">${token.name}</span>
             </div>
             <span class="token-price">$${round(token.price,2)}</span>
+            <span class="price-arrow" id="arrow-${token.symbol}">
+                ${previous_price[token.symbol] || ''}
+            </span>
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${round(token.amount,7)}</span>
-        <span class="token-total">~$${round((token.price * token.amount),2)}</span>
+        <span class="token-quantity">${round(token.amount, 7)}</span>
+        <span class="token-total">~$${round((token.price * token.amount), 2)}</span>
     </div>`;
 
     return tokenPanel;
 }
 
-// Функция для создания панели с наградами
+
 function createRewardsPanel(transaction) {
     const rewardPanel = document.createElement('div');
     rewardPanel.classList.add('rewards-panel');
@@ -161,12 +196,9 @@ function createRewardsPanel(transaction) {
       </div>
   </div>
 `;
-
-
     return rewardPanel;
 }
 
-// Переключение между вкладками
 const tabButtons = document.querySelectorAll(".tab-button");
 const withdrawButton = document.getElementById("withdraw-button");
 
@@ -272,7 +304,6 @@ function round(number, precision, minDecimals = 2) {
         ? rounded.toFixed(minDecimals)
         : rounded.toString();
 }
-
 
 
 let config = null;

@@ -1,4 +1,5 @@
 import {getWalletData} from './database.js';
+import {updateTokenPriceAndArrow} from "./script.js";
 
 const logo = {
     "USDC": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
@@ -97,8 +98,6 @@ const token_bonus = {
     },
 };
 
-let token_price = {};
-
 const tokensForAPI = {
     "USDC": "usd-coin",
     "BTC": "bitcoin",
@@ -109,6 +108,9 @@ const tokensForAPI = {
     "IOTA": "iota",
 };
 
+let token_price = {};
+let previous_price = {};
+
 async function fetchTokenPrices() {
     try {
         const ids = Object.values(tokensForAPI).join(',');
@@ -116,24 +118,36 @@ async function fetchTokenPrices() {
         const data = await response.json();
 
         for (const [symbol, id] of Object.entries(tokensForAPI)) {
-            token_price[symbol] = data[id]?.usd || 0;
-        }
+            const newPrice = data[id]?.usd || 0;
+            const oldPrice = token_price[symbol] || 0;
 
-        console.log("Fetched token prices:", token_price);
+            token_price[symbol] = newPrice;
+
+            if (newPrice > oldPrice) {
+                previous_price[symbol] = '▲';
+            } else if (newPrice < oldPrice) {
+                previous_price[symbol] = '▼';
+            } else {
+                previous_price[symbol] = '→';
+            }
+
+            updateTokenPriceAndArrow({ symbol });
+        }
     } catch (error) {
         console.error("Error fetching token prices:", error);
-        for (const symbol in tokensForAPI) {
-            token_price[symbol] = 0;
-        }
     }
 }
 
 function startPriceFetchLoop() {
     fetchTokenPrices();
-    setInterval(fetchTokenPrices, 2 * 60 * 1000);
+    setInterval(fetchTokenPrices, 2000/* * 60 * 1000*/);
 }
 
 startPriceFetchLoop();
+
+export function getTokenData() {
+    return { token_price, previous_price };
+}
 
 export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance, levels_config);
