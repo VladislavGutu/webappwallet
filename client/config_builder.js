@@ -151,7 +151,7 @@ async function fetchTokenPrices() {
 }
 
 fetchTokenPrices().then(r => r).catch(e => e);
-setInterval(fetchTokenPrices, 2 * 40 * 1000);
+setInterval(fetchTokenPrices, 2 * 60 * 1000);
 
 
 export async function create_config(wallet_address, balance, levels_config) {
