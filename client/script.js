@@ -132,7 +132,7 @@ function updateWalletInfo(walletAddress, tokens) {
 export function updateTokenPriceAndArrow({ symbol, price, arrow, percentageChange }) {
     const priceElement = document.getElementById(`price-${symbol}`);
     const arrowElement = document.getElementById(`arrow-${symbol}`);
-    const totalElement = document.getElementById(`total-${symbol}`); // Идентификатор для token-total
+    const totalElement = document.getElementById(`total-${symbol}`);
 
     if (priceElement && arrowElement) {
         priceElement.innerHTML = `$${price.toFixed(2)}`;
@@ -175,7 +175,7 @@ function createTokenPanel(token) {
                 <span class="token-name">${token.name}</span>
             </div>
             <div class="token-price-container">
-                <span class="token-price" id="price-${token.symbol}">${token.price.toFixed(3)}</span>
+                <span class="token-price" id="price-${token.symbol}">$${token.price.toFixed(3)}</span>
                 <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}" id="arrow-${token.symbol}">
                     ${previous_price[token.symbol] || '⧫'} ${token.price > 0 ? `${randomValue.toFixed(2)}%` : ''}
                 </span>
