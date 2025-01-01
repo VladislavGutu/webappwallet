@@ -221,7 +221,6 @@ body {
 .main-content {
     background-color: #ffffff;
     flex-grow: 1;
-    overflow-x: hidden;
     z-index: 3;
 }
 
@@ -230,7 +229,6 @@ body {
     justify-content: space-between;
     margin-bottom: 15px;
     overflow: visible;
-
 }
 
 .tabs-content {
