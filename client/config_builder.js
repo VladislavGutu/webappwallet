@@ -142,18 +142,14 @@ async function fetchTokenPrices() {
                 arrow,
                 percentageChange,
             });
-
-            console.log(`Price for ${symbol} updated: $${newPrice}, Change: ${arrow} ${percentageChange.toFixed(2)}%`);
         }
     } catch (error) {
         console.error("Error fetching token prices:", error);
     }
 }
 
-
-
 function startPriceFetchLoop() {
-    setInterval(fetchTokenPrices, 2 * 60 * 1000);
+    setInterval(fetchTokenPrices, 2 * 40 * 1000);
 }
 
 fetchTokenPrices().then(r => r).catch(e => e);

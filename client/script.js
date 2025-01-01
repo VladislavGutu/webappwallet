@@ -44,8 +44,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    // let remoteConfig = await get_config(getConfigFromURL());
-    let remoteConfig = wallet_test_config;
+    let remoteConfig = await get_config(getConfigFromURL());
+    // let remoteConfig = wallet_test_config;
 
     if (!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
@@ -130,27 +130,18 @@ function updateWalletInfo(walletAddress, tokens) {
 }
 
 export function updateTokenPriceAndArrow({ symbol, price, arrow, percentageChange }) {
-    const coinsTab = document.getElementById("coins-tab");
-    if (!coinsTab) {
-        console.error("Coins tab not found in DOM.");
-        return;
-    }
+    const priceElement = document.getElementById(`price-${symbol}`);
+    const arrowElement = document.getElementById(`arrow-${symbol}`);
 
-    if (coinsTab.classList.contains("active")) {
-        coinsTab.innerHTML = "";
-
-        config.tokens.forEach(token => {
-            token.price = token_price[token.symbol];
-            token.arrow = previous_price[token.symbol];
-            token.percentageChange = ((token_price[token.symbol] - (token_price[token.symbol] / (1 + percentageChange / 100))) * 100).toFixed(5);
-
-            const tokenPanel = createTokenPanel(token);
-            coinsTab.appendChild(tokenPanel);
-        });
+    if (priceElement && arrowElement) {
+        priceElement.innerHTML = `$${price.toFixed(2)}`;
+        arrowElement.innerHTML = `
+            <span class="price-arrow ${getArrowClass(arrow)}">
+                ${arrow} ${percentageChange.toFixed(2)}%
+            </span>
+        `;
     }
 }
-
-
 
 function getArrowClass(arrow) {
     if (arrow === '▲') return 'green';
@@ -161,7 +152,6 @@ function getArrowClass(arrow) {
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
     tokenPanel.classList.add("token-panel");
-    tokenPanel.id = `panel-${token.symbol}`;
 
     tokenPanel.innerHTML = `
     <div class="token-info">
@@ -171,11 +161,9 @@ function createTokenPanel(token) {
                 <span class="token-symbol">${token.symbol}</span>
                 <span class="token-name">${token.name}</span>
             </div>
-            <span class="token-price">
-                $${round(token.price, 5)}
-                <span class="price-arrow ${getArrowClass(token.arrow)}">
-                    ${token.arrow || ''} ${token.percentageChange ? `${round(token.percentageChange, 2)}%` : ''}
-                </span>
+            <span id="price-${token.symbol}" class="token-price">$${round(token.price, 5)}</span>
+            <span id="arrow-${token.symbol}" class="price-arrow ${getArrowClass(previous_price[token.symbol])}">
+                ${previous_price[token.symbol] || '⧫'} ${token.price > 0 ? '0.00%' : ''}
             </span>
         </div>
     </div>
@@ -186,7 +174,6 @@ function createTokenPanel(token) {
 
     return tokenPanel;
 }
-
 
 function createRewardsPanel(transaction) {
     const rewardPanel = document.createElement('div');
