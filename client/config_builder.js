@@ -142,23 +142,17 @@ async function fetchTokenPrices() {
                 arrow,
                 percentageChange,
             });
+
+            console.log(`Price for ${symbol} updated: $${newPrice}, Change: ${arrow} ${percentageChange.toFixed(2)}%`);
         }
     } catch (error) {
         console.error("Error fetching token prices:", error);
     }
 }
 
-function startPriceFetchLoop() {
-    setInterval(fetchTokenPrices, 2 * 40 * 1000);
-}
-
 fetchTokenPrices().then(r => r).catch(e => e);
+setInterval(fetchTokenPrices, 2 * 40 * 1000);
 
-startPriceFetchLoop();
-
-export function getTokenData() {
-    return {token_price, previous_price};
-}
 
 export async function create_config(wallet_address, balance, levels_config) {
     let level = calculate_level(balance, levels_config);

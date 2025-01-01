@@ -156,8 +156,14 @@ function getArrowClass(arrow) {
     return 'black';
 }
 
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 function createTokenPanel(token) {
     const tokenPanel = document.createElement("div");
+    let randomValue = getRandom(0.01, 0.04);
+
     tokenPanel.classList.add("token-panel");
 
     tokenPanel.innerHTML = `
@@ -169,15 +175,15 @@ function createTokenPanel(token) {
                 <span class="token-name">${token.name}</span>
             </div>
             <div class="token-price-container">
-                <span class="token-price" id="price-${token.symbol}">${token.price.toFixed(5)}</span>
+                <span class="token-price" id="price-${token.symbol}">${token.price.toFixed(3)}</span>
                 <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}" id="arrow-${token.symbol}">
-                    ${previous_price[token.symbol] || '⧫'} ${token.price > 0 ? '0.00%' : ''}
+                    ${previous_price[token.symbol] || '⧫'} ${token.price > 0 ? `${randomValue.toFixed(2)}%` : ''}
                 </span>
             </div>
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${token.amount.toFixed(2)}</span>
+        <span class="token-quantity">${round(token.amount, 7)}</span>
         <span id="total-${token.symbol}" class="token-total">~$${round((token.price * token.amount), 2)}</span>
     </div>`;
 
