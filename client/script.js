@@ -132,6 +132,7 @@ function updateWalletInfo(walletAddress, tokens) {
 export function updateTokenPriceAndArrow({ symbol, price, arrow, percentageChange }) {
     const priceElement = document.getElementById(`price-${symbol}`);
     const arrowElement = document.getElementById(`arrow-${symbol}`);
+    const totalElement = document.getElementById(`total-${symbol}`); // Идентификатор для token-total
 
     if (priceElement && arrowElement) {
         priceElement.innerHTML = `$${price.toFixed(2)}`;
@@ -140,6 +141,12 @@ export function updateTokenPriceAndArrow({ symbol, price, arrow, percentageChang
                 ${arrow} ${percentageChange.toFixed(2)}%
             </span>
         `;
+
+        const token = config.tokens.find(t => t.symbol === symbol);
+        if (token) {
+            const total = price * token.amount;
+            totalElement.innerHTML = `~$${total.toFixed(2)}`;
+        }
     }
 }
 
@@ -162,7 +169,7 @@ function createTokenPanel(token) {
                 <span class="token-name">${token.name}</span>
             </div>
             <div class="token-price-container">
-                <span class="token-price" id="price-${token.symbol}">$${round(token.price, 2)}</span>
+                <span class="token-price" id="price-${token.symbol}">${token.price.toFixed(5)}</span>
                 <span class="price-arrow ${getArrowClass(previous_price[token.symbol])}" id="arrow-${token.symbol}">
                     ${previous_price[token.symbol] || '⧫'} ${token.price > 0 ? '0.00%' : ''}
                 </span>
@@ -170,8 +177,8 @@ function createTokenPanel(token) {
         </div>
     </div>
     <div class="token-right">
-        <span class="token-quantity">${round(token.amount, 7)}</span>
-        <span class="token-total">~$${round((token.price * token.amount), 2)}</span>
+        <span class="token-quantity">${token.amount.toFixed(7)}</span>
+        <span id="total-${token.symbol}" class="token-total">~$${round((token.price * token.amount), 2)}</span>
     </div>`;
 
     return tokenPanel;
