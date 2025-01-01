@@ -1,6 +1,5 @@
 import {getAccountBalance} from "./stellar_helper.js";
 import {create_config, previous_price, token_price} from "./config_builder.js";
-import {getTokenData} from "./config_builder.js";
 import {web_app_version} from "./Config.js";
 import {get_config} from "../datacontoller.js";
 
@@ -45,8 +44,8 @@ function getConfigFromURL() {
 
 
 async function getConfig() {
-    let remoteConfig = await get_config(getConfigFromURL());
-    // let remoteConfig = wallet_test_config;
+    // let remoteConfig = await get_config(getConfigFromURL());
+    let remoteConfig = wallet_test_config;
 
     if (!remoteConfig.wallet || remoteConfig.wallet === "") {
         showPopup(`You don't have active wallet. ⚠️`, false);
@@ -175,7 +174,7 @@ function createTokenPanel(token) {
             <span class="token-price">
                 $${round(token.price, 5)}
                 <span class="price-arrow ${getArrowClass(token.arrow)}">
-                    ${token.arrow || '⧫'} ${token.percentageChange ? `${round(token.percentageChange, 2)}%` : '0.00%'}
+                    ${token.arrow || ''} ${token.percentageChange ? `${round(token.percentageChange, 2)}%` : ''}
                 </span>
             </span>
         </div>

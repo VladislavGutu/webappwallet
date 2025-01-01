@@ -151,10 +151,12 @@ async function fetchTokenPrices() {
 }
 
 
+
 function startPriceFetchLoop() {
-    fetchTokenPrices();
     setInterval(fetchTokenPrices, 2 * 60 * 1000);
 }
+
+fetchTokenPrices().then(r => r).catch(e => e);
 
 startPriceFetchLoop();
 
