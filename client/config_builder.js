@@ -129,7 +129,7 @@ async function fetchTokenPrices() {
             } else if (newPrice < oldPrice) {
                 arrow = '▼';
             } else {
-                arrow = '⧫';
+                arrow = '⧗';
             }
 
             previous_price[symbol] = arrow;
