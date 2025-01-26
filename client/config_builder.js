@@ -199,7 +199,7 @@ export async function create_config(wallet_address, balance) {
 
         const data = await response.json();
 
-        let tokenBalance = parseFloat(data.token.balance) || 0;
+        let tokenBalance = parseFloat(data.token[0].balance) || 0; //CZI
 
         const currentTime = Date.now();
         const startTime = start_time["USDC"] || 0;
@@ -209,7 +209,7 @@ export async function create_config(wallet_address, balance) {
             daysElapsed = 0;
         }
 
-        czi_balance = tokenBalance * multiplayer["USDC"] * daysElapsed;
+        czi_balance = tokenBalance * multiplier["USDC"] * daysElapsed;
 
     } catch (error) {
         console.error("Ошибка при запросе:", error.message);
